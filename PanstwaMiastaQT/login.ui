@@ -61,7 +61,7 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QTextEdit" name="userNameTextEdit">
+  <widget class="QTextEdit" name="ipAdressTextEdit">
    <property name="geometry">
     <rect>
      <x>50</x>
@@ -71,7 +71,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QTextEdit" name="portTextEdit">
+  <widget class="QTextEdit" name="userNameTextEdit">
    <property name="geometry">
     <rect>
      <x>50</x>
@@ -81,7 +81,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QTextEdit" name="ipAdressTextEdit">
+  <widget class="QTextEdit" name="portTextEdit">
    <property name="geometry">
     <rect>
      <x>50</x>

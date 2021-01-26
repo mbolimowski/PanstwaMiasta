@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>834</width>
+    <width>740</width>
     <height>722</height>
    </rect>
   </property>
@@ -16,8 +16,8 @@
   <widget class="QPushButton" name="startButton">
    <property name="geometry">
     <rect>
-     <x>390</x>
-     <y>550</y>
+     <x>530</x>
+     <y>640</y>
      <width>200</width>
      <height>70</height>
     </rect>
@@ -29,14 +29,50 @@
   <widget class="QPushButton" name="zglosButton">
    <property name="geometry">
     <rect>
-     <x>390</x>
-     <y>450</y>
+     <x>530</x>
+     <y>540</y>
      <width>200</width>
      <height>70</height>
     </rect>
    </property>
    <property name="text">
     <string>Zgłoś odpowiedzi</string>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="iloscRundTextEdit">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>440</y>
+     <width>200</width>
+     <height>70</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+  </widget>
+  <widget class="QLabel" name="iloscRundlabel">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>370</y>
+     <width>200</width>
+     <height>70</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>ILOŚĆ RUND</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
   <widget class="QWidget" name="">
@@ -138,7 +174,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>120</y>
+     <y>110</y>
      <width>271</width>
      <height>788</height>
     </rect>

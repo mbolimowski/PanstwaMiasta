@@ -1,12 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>vote</class>
- <widget name="vote" class="QDialog">
+ <widget class="QDialog" name="vote">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>775</width>
+    <height>654</height>
    </rect>
   </property>
   <property name="windowTitle">

@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QPushButton" name="connectButton">
+  <widget class="QPushButton" name="polaczButton">
    <property name="geometry">
     <rect>
      <x>50</x>
@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>CONNECT</string>
+    <string>POŁĄCZ</string>
    </property>
   </widget>
   <widget class="QLabel" name="portLabel">
@@ -45,7 +45,7 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="ipAdressLabel">
+  <widget class="QLabel" name="ipAdresLabel">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -55,13 +55,13 @@
     </rect>
    </property>
    <property name="text">
-    <string>IP ADRESS</string>
+    <string>IP ADRES</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QTextEdit" name="ipAdressTextEdit">
+  <widget class="QTextEdit" name="ipAdresTextEdit">
    <property name="geometry">
     <rect>
      <x>50</x>
@@ -70,8 +70,13 @@
      <height>41</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
   </widget>
-  <widget class="QTextEdit" name="userNameTextEdit">
+  <widget class="QTextEdit" name="nazwaUzytkownikaTextEdit">
    <property name="geometry">
     <rect>
      <x>50</x>
@@ -79,6 +84,11 @@
      <width>181</width>
      <height>41</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
    </property>
   </widget>
   <widget class="QTextEdit" name="portTextEdit">
@@ -90,8 +100,13 @@
      <height>41</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
   </widget>
-  <widget class="QLabel" name="userNameLabel">
+  <widget class="QLabel" name="nazwaUzytkownikaLabel">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -107,7 +122,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>USER NAME</string>
+    <string>NAZWA UŻYTKOWNIKA</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>

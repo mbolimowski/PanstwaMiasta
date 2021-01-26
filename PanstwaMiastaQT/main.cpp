@@ -1,14 +1,11 @@
-#include "gamemain.h"
-#include "login.h"
+#include "application.h"
+
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    Login x;
-    x.show();
-    gameMain z;
-    z.show();
-
+    Application * app = new Application();
+    app->hide();
     return a.exec();
 }

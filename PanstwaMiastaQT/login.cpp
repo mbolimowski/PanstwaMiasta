@@ -20,11 +20,11 @@ QString Login::getPort()
 }
 QString Login::getUsername()
 {
-    return ui->userNameTextEdit->toPlainText();
+    return ui->nazwaUzytkownikaTextEdit->toPlainText();
 }
 QString Login::getIpAddr()
 {
-    return ui->ipAdressTextEdit->toPlainText();
+    return ui->ipAdresTextEdit->toPlainText();
 }
 
 void Login::setPort(QString port)
@@ -34,17 +34,17 @@ void Login::setPort(QString port)
 
 void Login::setUsername(QString username)
 {
-    ui->userNameTextEdit->setText(username);
+    ui->nazwaUzytkownikaTextEdit->setText(username);
 }
 
 void Login::setIpAddr(QString ipAddr)
 {
-    ui->ipAdressTextEdit->setText(ipAddr);
+    ui->ipAdresTextEdit->setText(ipAddr);
 }
 
 QPushButton * Login::getConnectButton()
 {
-    return ui->connectButton;
+    return ui->polaczButton;
 }
 
 
@@ -59,7 +59,7 @@ int Login::readUsername()
     }
     QTextStream instream(&file);
     QString username = instream.readLine();
-    ui->userNameTextEdit->setText(username);
+    ui->nazwaUzytkownikaTextEdit->setText(username);
     file.close();
     return 0;
 }
@@ -73,7 +73,7 @@ int Login::setUsername()
         mb.critical(this, "Error", "Failed opening file username.txt!");
         return -1;
     }
-    file.write(ui->userNameTextEdit->toPlainText().toUtf8(), ui->userNameTextEdit->toPlainText().toUtf8().size());
+    file.write(ui->nazwaUzytkownikaTextEdit->toPlainText().toUtf8(), ui->nazwaUzytkownikaTextEdit->toPlainText().toUtf8().size());
     file.close();
     return 0;
 }

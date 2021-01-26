@@ -1,17 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>vote</class>
- <widget name="vote" class="QDialog">
+ <widget class="QDialog" name="vote">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>741</width>
+    <height>691</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <widget class="QLabel" name="glosowanieLabel">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>20</y>
+     <width>261</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>30</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>GŁOSOWANIE</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="glosujButton">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>580</y>
+     <width>181</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>GŁOSUJ</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>130</y>
+     <width>721</width>
+     <height>421</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="glosowanieLayout">
+    <item>
+     <layout class="QVBoxLayout" name="panstwoLayout">
+      <item>
+       <widget class="QLabel" name="panstwoLabel">
+        <property name="text">
+         <string>Państwo</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QListWidget" name="panstwoListWidget"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="miastoLayout">
+      <item>
+       <widget class="QLabel" name="miastoLabel">
+        <property name="text">
+         <string>Miasto</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QListWidget" name="miastoListWidget"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="zwierzeLayout">
+      <item>
+       <widget class="QLabel" name="zwierzeLabel">
+        <property name="text">
+         <string>Zwierze</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QListWidget" name="zwierzeListWidget"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="roslinaLayout">
+      <item>
+       <widget class="QLabel" name="roslinaLabel">
+        <property name="text">
+         <string>Roślina</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QListWidget" name="roslinaListWidget"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="imieLayout">
+      <item>
+       <widget class="QLabel" name="imieLabel">
+        <property name="text">
+         <string>Imię</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QListWidget" name="imieListWidget"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="wodyLayout">
+      <item>
+       <widget class="QLabel" name="wodyLabel">
+        <property name="text">
+         <string>Wody</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QListWidget" name="wodyListWidget"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="przedmiotLayout">
+      <item>
+       <widget class="QLabel" name="przedmiotLabel">
+        <property name="text">
+         <string>Przedmiot</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QListWidget" name="przedmiotListWidget"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="slawnaOsobaLayout">
+      <item>
+       <widget class="QLabel" name="slawnaOsobaLabel">
+        <property name="text">
+         <string>Sławna osoba</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QListWidget" name="slawnaOsobaListWidget"/>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
  </widget>
  <resources/>
  <connections/>

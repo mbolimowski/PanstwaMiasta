@@ -36,7 +36,7 @@ void Application::connectButtonHit()
 
     connect(connectionTimeoutTimer, &QTimer::timeout, [&]{
             connectionTimeoutTimer->deleteLater();
-            QMessageBox::critical(this, "Error", "Connection failed!");
+            QMessageBox::critical(login, "Błąd", "Nie udało się połączyć!");
         });
     connect(sock, &QTcpSocket::connected, this, &Application::connected);
     connect(sock, &QTcpSocket::disconnected, this, &Application::disconnected);
@@ -63,14 +63,49 @@ void Application::connected()
 void Application::disconnected()
 {
     sock->close();
-    QMessageBox::critical(this, "Error", "Disconnected!");
+    QMessageBox::critical(this, "Błąd", "Rozłączono z serwerem!");
     login->show();
     gamemain->hide();
 }
 
 void Application::readyRead()
 {
+    QString message = QString(sock->readAll());
+    std::vector<QString> actions;
+    int counter = 0;
+    qDebug() << message;
+    for(int i=0;i<(int)message.length();i++)
+    {
+        if(message[i] == '\n')
+                {
+                    QString action = message.mid(counter, i-counter);
+                    counter = i+1;
+                    actions.push_back(action);
+                }
+    }
+    for(auto it = actions.begin();it != actions.end();++it)
+    {
+        QString action = (*it);
+        if(action[0] == '1')
+        {
+            gamemain->setCategoriesDisabled();
+            QMessageBox mb;
+            mb.information(gamemain, "Informacja", "Zostałeś właścicielem! Oznacza to, że możesz wybrać kategorie dostępne w następnej grze oraz ilość rund. Kliknij przycisk start gdy będziesz gotowy!");
+        }
+        if(action[0] == '2')
+        {
+            gamemain->setCheckboxesDisabled();
+            gamemain->setCategoriesDisabled();
+            gamemain->setStartButtonDisabled();
+            QMessageBox mb;
+            mb.information(gamemain, "Informacja", "Poczekaj, aż właściciel poczekalni rozpocznie grę!");
+        }
+        if(action[0] == 'i')
+        {
 
+        }
+
+    }
 }
 
 void Application::closeAll()

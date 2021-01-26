@@ -15,6 +15,16 @@ public:
     explicit gameMain(QWidget *parent = nullptr);
     ~gameMain();
     Ui::gameMain * getUi();
+
+    void setCategoriesDisabled();
+
+    void setCheckboxesDisabled();
+
+    void setStartButtonDisabled();
+
+    void addPlayerName(QString name);
+
+    void addPoints(QString points);
 private:
     Ui::gameMain *ui;
 };

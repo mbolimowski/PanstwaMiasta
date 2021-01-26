@@ -27,8 +27,10 @@ public:
 
     QPushButton * getConnectButton();
 
-   int readUsername();
-   int setUsername();
+    int readUsername();
+    int setUsername();
+
+
 private:
     Ui::Login *ui;
 };

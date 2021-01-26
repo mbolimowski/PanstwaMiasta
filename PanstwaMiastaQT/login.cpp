@@ -54,7 +54,7 @@ int Login::readUsername()
     if(!file.open(QIODevice::ReadOnly))
     {
             QMessageBox mb;
-            mb.critical(this, "Error", "Failed opening file username.txt!");
+            mb.critical(this, "Błąd", "Nie udało się otworzyć pliku username.txt!");
             return -1;
     }
     QTextStream instream(&file);
@@ -70,7 +70,7 @@ int Login::setUsername()
     if(!file.open(QIODevice::Truncate|QIODevice::WriteOnly))
     {
         QMessageBox mb;
-        mb.critical(this, "Error", "Failed opening file username.txt!");
+        mb.critical(this, "Błąd", "Nie udało się otworzyć pliku username.txt!");
         return -1;
     }
     file.write(ui->nazwaUzytkownikaTextEdit->toPlainText().toUtf8(), ui->nazwaUzytkownikaTextEdit->toPlainText().toUtf8().size());

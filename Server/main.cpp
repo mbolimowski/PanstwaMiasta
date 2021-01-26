@@ -17,11 +17,13 @@
 class Client;
 int servFd;
 int epollFd;
+bool gameStarted;
 std::unordered_set<Client*> clients;
 void ctrl_c(int);
 void sendToAllBut(int fd, char * buffer, int count);
 uint16_t readPort(char * txt);
 void setReuseAddr(int sock);
+void startOptions(Client * client);
 struct Handler {
     virtual ~Handler(){}
     virtual void handleEvent(uint32_t events) = 0;
@@ -137,7 +139,10 @@ class : Handler {
             auto clientFd = accept(servFd, (sockaddr*) &clientAddr, &clientAddrSize);
             if(clientFd == -1) error(1, errno, "accept failed");
             printf("New connection from: %s:%hu (fd: %d)\n", inet_ntoa(clientAddr.sin_addr), ntohs(clientAddr.sin_port), clientFd);
-            clients.insert(new Client(clientFd));
+            Client * newClient = new Client(clientFd); 
+            clients.insert(newClient);
+            if(!gameStarted)
+            startOptions(newClient);
         }
         if(events & ~EPOLLIN){
             error(0, errno, "Event %x on server socket", events);
@@ -147,6 +152,7 @@ class : Handler {
 } servHandler;
 
 int main(int argc, char ** argv){
+    gameStarted = false;
     if(argc != 2) error(1, 0, "Need 1 argument - port");
     auto port = readPort(argv[1]);
     servFd = socket(AF_INET, SOCK_STREAM, 0);
@@ -200,4 +206,28 @@ void sendToAllBut(int fd, char * buffer, int count){
         if(client->fd()!=fd)
             client->write(buffer, count);
     }
+}
+
+void startOptions(Client * newClient)
+{
+    //sprawdzam ktora osoba jest pierwsza aby odblokowac lub zablokowac jej checkboxy do wyboru kategorii
+    int lowest_fd = 1000000;
+    for(Client * client : clients)
+    {
+        if(client->fd() < lowest_fd && client->fd() != servFd)
+        {
+            lowest_fd = client->fd();
+        }
+    }
+    //f - pierwszy client moze on ustawiac co chce przed rozpoczeciem rozgrywki
+    char message[255];
+    memset(message, 0 , 255);
+    if(newClient->fd() == lowest_fd)
+    {
+    strcpy(message, "1\n");
+    }
+    else{
+    strcpy(message, "2\n");
+    }
+    write(newClient->fd(), message, strlen(message));
 }

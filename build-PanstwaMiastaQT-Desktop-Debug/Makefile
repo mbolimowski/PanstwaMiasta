@@ -50,11 +50,15 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../PanstwaMiastaQT/main.cpp \
-		../PanstwaMiastaQT/mainwindow.cpp moc_mainwindow.cpp
-OBJECTS       = main.o \
-		mainwindow.o \
-		moc_mainwindow.o
+SOURCES       = ../PanstwaMiastaQT/gamemain.cpp \
+		../PanstwaMiastaQT/login.cpp \
+		../PanstwaMiastaQT/main.cpp moc_gamemain.cpp \
+		moc_login.cpp
+OBJECTS       = gamemain.o \
+		login.o \
+		main.o \
+		moc_gamemain.o \
+		moc_login.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -118,6 +122,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
+		../PanstwaMiastaQT/.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -137,8 +142,10 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
-		../PanstwaMiastaQT/PanstwaMiastaQT.pro ../PanstwaMiastaQT/mainwindow.h ../PanstwaMiastaQT/main.cpp \
-		../PanstwaMiastaQT/mainwindow.cpp
+		../PanstwaMiastaQT/PanstwaMiastaQT.pro ../PanstwaMiastaQT/gamemain.h \
+		../PanstwaMiastaQT/login.h ../PanstwaMiastaQT/gamemain.cpp \
+		../PanstwaMiastaQT/login.cpp \
+		../PanstwaMiastaQT/main.cpp
 QMAKE_TARGET  = PanstwaMiastaQT
 DESTDIR       = 
 TARGET        = PanstwaMiastaQT
@@ -147,7 +154,7 @@ TARGET        = PanstwaMiastaQT
 first: all
 ####### Build rules
 
-$(TARGET): ui_mainwindow.h $(OBJECTS)  
+$(TARGET): ui_gamemain.h ui_login.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: ../PanstwaMiastaQT/PanstwaMiastaQT.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -213,6 +220,7 @@ Makefile: ../PanstwaMiastaQT/PanstwaMiastaQT.pro /usr/lib/x86_64-linux-gnu/qt5/m
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -300,6 +308,7 @@ Makefile: ../PanstwaMiastaQT/PanstwaMiastaQT.pro /usr/lib/x86_64-linux-gnu/qt5/m
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf:
@@ -338,9 +347,9 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../PanstwaMiastaQT/mainwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../PanstwaMiastaQT/main.cpp ../PanstwaMiastaQT/mainwindow.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../PanstwaMiastaQT/mainwindow.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../PanstwaMiastaQT/gamemain.h ../PanstwaMiastaQT/login.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../PanstwaMiastaQT/gamemain.cpp ../PanstwaMiastaQT/login.cpp ../PanstwaMiastaQT/main.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../PanstwaMiastaQT/gamemain.ui ../PanstwaMiastaQT/login.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -372,22 +381,31 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp
+compiler_moc_header_make_all: moc_gamemain.cpp moc_login.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp
-moc_mainwindow.cpp: ../PanstwaMiastaQT/mainwindow.h \
+	-$(DEL_FILE) moc_gamemain.cpp moc_login.cpp
+moc_gamemain.cpp: ../PanstwaMiastaQT/gamemain.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/maks/Pulpit/PanstwaMiasta/PanstwaMiastaQT -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../PanstwaMiastaQT/mainwindow.h -o moc_mainwindow.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/maks/Pulpit/PanstwaMiasta/PanstwaMiastaQT -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../PanstwaMiastaQT/gamemain.h -o moc_gamemain.cpp
+
+moc_login.cpp: ../PanstwaMiastaQT/login.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/maks/Pulpit/PanstwaMiasta/PanstwaMiastaQT -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../PanstwaMiastaQT/login.h -o moc_login.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_mainwindow.h
+compiler_uic_make_all: ui_gamemain.h ui_login.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_mainwindow.h
-ui_mainwindow.h: ../PanstwaMiastaQT/mainwindow.ui \
+	-$(DEL_FILE) ui_gamemain.h ui_login.h
+ui_gamemain.h: ../PanstwaMiastaQT/gamemain.ui \
 		/usr/lib/qt5/bin/uic
-	/usr/lib/qt5/bin/uic ../PanstwaMiastaQT/mainwindow.ui -o ui_mainwindow.h
+	/usr/lib/qt5/bin/uic ../PanstwaMiastaQT/gamemain.ui -o ui_gamemain.h
+
+ui_login.h: ../PanstwaMiastaQT/login.ui \
+		/usr/lib/qt5/bin/uic
+	/usr/lib/qt5/bin/uic ../PanstwaMiastaQT/login.ui -o ui_login.h
 
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
@@ -399,15 +417,23 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_ui
 
 ####### Compile
 
-main.o: ../PanstwaMiastaQT/main.cpp ../PanstwaMiastaQT/mainwindow.h
+gamemain.o: ../PanstwaMiastaQT/gamemain.cpp ../PanstwaMiastaQT/gamemain.h \
+		ui_gamemain.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gamemain.o ../PanstwaMiastaQT/gamemain.cpp
+
+login.o: ../PanstwaMiastaQT/login.cpp ../PanstwaMiastaQT/login.h \
+		ui_login.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o login.o ../PanstwaMiastaQT/login.cpp
+
+main.o: ../PanstwaMiastaQT/main.cpp ../PanstwaMiastaQT/gamewindow.h \
+		../PanstwaMiastaQT/login.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../PanstwaMiastaQT/main.cpp
 
-mainwindow.o: ../PanstwaMiastaQT/mainwindow.cpp ../PanstwaMiastaQT/mainwindow.h \
-		ui_mainwindow.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../PanstwaMiastaQT/mainwindow.cpp
+moc_gamemain.o: moc_gamemain.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_gamemain.o moc_gamemain.cpp
 
-moc_mainwindow.o: moc_mainwindow.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
+moc_login.o: moc_login.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_login.o moc_login.cpp
 
 ####### Install
 

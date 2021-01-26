@@ -39,45 +39,7 @@
     <string>Zgłoś odpowiedzi</string>
    </property>
   </widget>
-
-  <widget class="QTextEdit" name="iloscRundTextEdit">
-   <property name="geometry">
-    <rect>
-     <x>530</x>
-     <y>440</y>
-     <width>200</width>
-     <height>70</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>15</pointsize>
-    </font>
-   </property>
-  </widget>
-  <widget class="QLabel" name="iloscRundlabel">
-   <property name="geometry">
-    <rect>
-     <x>530</x>
-     <y>370</y>
-     <width>200</width>
-     <height>70</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>15</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>ILOŚĆ RUND</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QWidget" name="">
-
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>

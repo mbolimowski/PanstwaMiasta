@@ -12,3 +12,9 @@ Login::~Login()
 {
     delete ui;
 }
+
+
+QString Login::getPort()
+{}
+QString getUsername();
+QString getIpAddr();

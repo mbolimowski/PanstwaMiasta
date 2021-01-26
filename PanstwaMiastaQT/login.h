@@ -14,7 +14,9 @@ class Login : public QDialog
 public:
     explicit Login(QWidget *parent = nullptr);
     ~Login();
-
+    QString getPort();
+    QString getUsername();
+    QString getIpAddr();
 private:
     Ui::Login *ui;
 };

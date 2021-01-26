@@ -14,7 +14,7 @@ class gameMain : public QDialog
 public:
     explicit gameMain(QWidget *parent = nullptr);
     ~gameMain();
-
+    Ui::gameMain * getUi();
 private:
     Ui::gameMain *ui;
 };

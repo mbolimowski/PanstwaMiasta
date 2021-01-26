@@ -16,7 +16,7 @@ Login::~Login()
 
 QString Login::getPort()
 {
-
+    return ui->portTextEdit
 }
 QString getUsername()
 {

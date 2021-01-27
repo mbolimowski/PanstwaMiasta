@@ -48,6 +48,7 @@ void Application::connectButtonHit()
         closeAll();
         delete this;
     }
+    sendMessage("n" + login->getUsername());
 }
 
 

@@ -22,6 +22,8 @@ public:
 
     void setStartButtonDisabled();
 
+    void setEditRoundsTextEditDisabled();
+
     void clearPlayerAndPointsListWidget();
 
     void addPlayerName(QString name);

@@ -36,6 +36,7 @@ struct Handler {
 class Client : public Handler {
     int _fd;
     char name[255];
+    int points;
     struct Buffer {
         Buffer() {data = (char*) malloc(len);}
         Buffer(const char* srcData, ssize_t srcLen) : len(srcLen) {data = (char*) malloc(len); memcpy(data, srcData, len);}
@@ -59,6 +60,7 @@ public:
         epoll_event ee {EPOLLIN|EPOLLRDHUP, {.ptr=this}};
         epoll_ctl(epollFd, EPOLL_CTL_ADD, _fd, &ee);
         memset(name,0,255);
+        points = 0;
     }
     virtual ~Client(){
         epoll_ctl(epollFd, EPOLL_CTL_DEL, _fd, nullptr);
@@ -67,6 +69,7 @@ public:
     }
     int fd() const {return _fd;}
     char * getName() {return name;}
+    int getPoints() {return points;}
     virtual void handleEvent(uint32_t events) override {
         if(events & EPOLLIN) {
             ssize_t count = read(_fd, readBuffer.dataPos(), readBuffer.remaining());
@@ -267,8 +270,13 @@ void sendPlayersInfo()
         char const * fdchar = s.c_str();
         strncat(message, fdchar, strlen(fdchar));
         strncat(message, client->getName(), strlen(client->getName()));
-        strcat(message, " 0,\n");
+        std::string ps = std::to_string(client->getPoints());
+        char const * pointschar = ps.c_str();
+        strcat(message, " \0");
+        strncat(message, pointschar, strlen(pointschar));
+        strcat(message, ",");
     }
     std::cout << message <<std::endl;
+    strcat(message, "\n");
     sendToAll(message, strlen(message));
 }

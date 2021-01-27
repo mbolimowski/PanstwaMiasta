@@ -103,6 +103,7 @@ void Application::readyRead()
             gamemain->setCheckboxesDisabled();
             gamemain->setCategoriesDisabled();
             gamemain->setStartButtonDisabled();
+            gamemain->setEditRoundsTextEditDisabled();
             QMessageBox mb;
             mb.information(gamemain, "Informacja", "Poczekaj, aż właściciel poczekalni rozpocznie grę!");
         }

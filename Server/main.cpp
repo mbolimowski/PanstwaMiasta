@@ -21,6 +21,7 @@ bool gameStarted;
 std::unordered_set<Client*> clients;
 void ctrl_c(int);
 void sendToAllBut(int fd, char * buffer, int count);
+void sendToAll(char * buffer, int count);
 uint16_t readPort(char * txt);
 void setReuseAddr(int sock);
 void startOptions(Client * client);
@@ -65,6 +66,7 @@ public:
         close(_fd);
     }
     int fd() const {return _fd;}
+    char * getName() {return name;}
     virtual void handleEvent(uint32_t events) override {
         if(events & EPOLLIN) {
             ssize_t count = read(_fd, readBuffer.dataPos(), readBuffer.remaining());
@@ -72,7 +74,6 @@ public:
                 events |= EPOLLERR;
             else {
                 readBuffer.pos += count;
-                
                 char * eol = (char*) memchr(readBuffer.data, '\n', readBuffer.pos);
                 if(eol == nullptr) {
                     if(0 == readBuffer.remaining())
@@ -80,11 +81,12 @@ public:
                 } else {
                     do {
                         auto thismsglen = eol - readBuffer.data + 1;
-                        std::cout << readBuffer.data<<std::endl;
+                        
                         if(readBuffer.data[0] == 'n')
                         {
-                            strncat(name, readBuffer.data + 1, thismsglen -1);
+                            strncat(name, readBuffer.data + 1, thismsglen -2);
                             std::cout << name << std::endl;
+                            sendPlayersInfo();
                         }
                         //sendToAllBut(_fd, readBuffer.data, thismsglen);
                         auto nextmsgslen =  readBuffer.pos - thismsglen;
@@ -220,6 +222,15 @@ void sendToAllBut(int fd, char * buffer, int count){
     }
 }
 
+
+void sendToAll(char * buffer, int count){
+    for(Client * client : clients)
+    {
+        client->write(buffer, count);
+    }
+}
+
+
 void startOptions(Client * newClient)
 {
     //sprawdzam ktora osoba jest pierwsza aby odblokowac lub zablokowac jej checkboxy do wyboru kategorii
@@ -242,4 +253,22 @@ void startOptions(Client * newClient)
     strcpy(message, "2\n");
     }
     write(newClient->fd(), message, strlen(message));
+}
+
+
+void sendPlayersInfo()
+{
+    char message[255];
+    memset(message,0,255);
+    strcpy(message, "i\0");
+    for(Client * client : clients)
+    {
+        std::string s = std::to_string(client->fd());
+        char const * fdchar = s.c_str();
+        strncat(message, fdchar, strlen(fdchar));
+        strncat(message, client->getName(), strlen(client->getName()));
+        strcat(message, " 0,\n");
+    }
+    std::cout << message <<std::endl;
+    sendToAll(message, strlen(message));
 }

@@ -27,7 +27,7 @@ Application::~Application()
 }
 
 void Application::sendMessage(QString message){
-    sock->write(message.toUtf8(), message.length());
+    sock->write(message.toUtf8(), message.toUtf8().length());
 }
 
 
@@ -51,7 +51,7 @@ void Application::connectButtonHit()
         closeAll();
         delete this;
     }
-    sendMessage("n" + login->getUsername());
+
 }
 
 
@@ -61,6 +61,7 @@ void Application::connected()
     connectionTimeoutTimer->deleteLater();
     login->hide();
     gamemain->show();
+    sendMessage("n" + login->getUsername() + "\n");
 }
 
 
@@ -95,6 +96,7 @@ void Application::readyRead()
             gamemain->setCategoriesDisabled();
             QMessageBox mb;
             mb.information(gamemain, "Informacja", "Zostałeś właścicielem! Oznacza to, że możesz wybrać kategorie dostępne w następnej grze oraz ilość rund. Kliknij przycisk start gdy będziesz gotowy!");
+
         }
         if(action[0] == '2')
         {
@@ -104,6 +106,7 @@ void Application::readyRead()
             QMessageBox mb;
             mb.information(gamemain, "Informacja", "Poczekaj, aż właściciel poczekalni rozpocznie grę!");
         }
+        qDebug() << action;
         if(action[0] == 'i')
         {
             QString name;

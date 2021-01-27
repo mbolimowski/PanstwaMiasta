@@ -24,12 +24,17 @@ void sendToAllBut(int fd, char * buffer, int count);
 uint16_t readPort(char * txt);
 void setReuseAddr(int sock);
 void startOptions(Client * client);
+void sendPlayersInfo();
+
+
+
 struct Handler {
     virtual ~Handler(){}
     virtual void handleEvent(uint32_t events) = 0;
 };
 class Client : public Handler {
     int _fd;
+    char name[255];
     struct Buffer {
         Buffer() {data = (char*) malloc(len);}
         Buffer(const char* srcData, ssize_t srcLen) : len(srcLen) {data = (char*) malloc(len); memcpy(data, srcData, len);}
@@ -52,6 +57,7 @@ public:
     Client(int fd) : _fd(fd) {
         epoll_event ee {EPOLLIN|EPOLLRDHUP, {.ptr=this}};
         epoll_ctl(epollFd, EPOLL_CTL_ADD, _fd, &ee);
+        memset(name,0,255);
     }
     virtual ~Client(){
         epoll_ctl(epollFd, EPOLL_CTL_DEL, _fd, nullptr);
@@ -74,7 +80,12 @@ public:
                 } else {
                     do {
                         auto thismsglen = eol - readBuffer.data + 1;
-                        sendToAllBut(_fd, readBuffer.data, thismsglen);
+                        if(readBuffer.data[0] == 'n')
+                        {
+                            strncat(name, readBuffer.data + 1, thismsglen -1);
+                            std::cout << name << std::endl;
+                        }
+                        //sendToAllBut(_fd, readBuffer.data, thismsglen);
                         auto nextmsgslen =  readBuffer.pos - thismsglen;
                         memmove(readBuffer.data, eol+1, nextmsgslen);
                         readBuffer.pos = nextmsgslen;

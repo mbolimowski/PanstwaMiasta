@@ -27,9 +27,7 @@ public:
     void disconnected();
     void readyRead();
 
-    void sendMessage(QString message){
-        sock->write(message.toUtf8(), message.length());
-    }
+    void sendMessage(QString message);
 
     void closeAll();
 };

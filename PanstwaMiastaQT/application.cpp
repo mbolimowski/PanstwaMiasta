@@ -26,6 +26,9 @@ Application::~Application()
     delete connectionTimeoutTimer;
 }
 
+void Application::sendMessage(QString message){
+    sock->write(message.toUtf8(), message.length());
+}
 
 
 void Application::connectButtonHit()

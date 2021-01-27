@@ -45,6 +45,10 @@ void gameMain::setStartButtonDisabled()
     ui->startButton->setEnabled(false);
 }
 
+void gameMain::clearPlayerAndPointsListWidget(){
+    ui->graczListWidget->clear();
+    ui->punktyListWidget->clear();
+}
 
 void gameMain::addPlayerName(QString name)
 {

@@ -22,6 +22,8 @@ public:
 
     void setStartButtonDisabled();
 
+    void clearPlayerAndPointsListWidget();
+
     void addPlayerName(QString name);
 
     void addPoints(QString points);

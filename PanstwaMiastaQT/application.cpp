@@ -109,6 +109,7 @@ void Application::readyRead()
         qDebug() << action;
         if(action[0] == 'i')
         {
+            gamemain->clearPlayerAndPointsListWidget();
             QString name;
             QString points;
 

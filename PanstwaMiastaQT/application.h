@@ -23,6 +23,8 @@ public:
     ~Application();
     void connectButtonHit();
 
+    void startButtonHit();
+
     void connected();
     void disconnected();
     void readyRead();

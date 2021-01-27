@@ -2,6 +2,7 @@
 #define GAMEMAIN_H
 
 #include <QDialog>
+#include <QMessageBox>
 
 namespace Ui {
 class gameMain;
@@ -29,6 +30,17 @@ public:
     void addPlayerName(QString name);
 
     void addPoints(QString points);
+
+    QString getRounds();
+
+    int isCheckedAtLeastOneBox();
+
+    int isRoundsCorrect();
+
+    QStringList getCheckedBoxes();
+
+    QPushButton * getStartButton();
+
 private:
     Ui::gameMain *ui;
 };

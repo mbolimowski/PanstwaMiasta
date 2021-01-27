@@ -80,6 +80,7 @@ public:
                 } else {
                     do {
                         auto thismsglen = eol - readBuffer.data + 1;
+                        std::cout << readBuffer.data<<std::endl;
                         if(readBuffer.data[0] == 'n')
                         {
                             strncat(name, readBuffer.data + 1, thismsglen -1);

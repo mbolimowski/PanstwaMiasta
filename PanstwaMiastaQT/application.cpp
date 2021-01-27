@@ -102,7 +102,25 @@ void Application::readyRead()
         }
         if(action[0] == 'i')
         {
+            QString name;
+            QString points;
 
+            int whereSpace = -1;
+            int whereComma = -1;
+
+            action = action.mid(1, action.length()-1);
+            for(int i = 0; i < action.length(); i++){
+                if(action[i] == ' '){
+                    whereSpace = i;
+                    name = action.mid(whereComma +1, i - whereComma - 1);
+                    gamemain->addPlayerName(name);
+                }
+                if(action[i] == ','){
+                    whereComma = i;
+                    points = action.mid(whereSpace + 1, i - whereSpace - 1);
+                    gamemain->addPoints(points);
+                }
+            }
         }
 
     }

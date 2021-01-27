@@ -91,6 +91,12 @@ public:
                             std::cout << name << std::endl;
                             sendPlayersInfo();
                         }
+                        if(readBuffer.data[0] == 's')
+                        {
+                            gameStarted = true;
+                            std::cout << "gra sie rozpoczela!" <<std::endl;
+                            std::cout << readBuffer.data << std::endl;
+                        }
                         //sendToAllBut(_fd, readBuffer.data, thismsglen);
                         auto nextmsgslen =  readBuffer.pos - thismsglen;
                         memmove(readBuffer.data, eol+1, nextmsgslen);

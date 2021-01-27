@@ -92,28 +92,28 @@ int gameMain::isCheckedAtLeastOneBox(){
 QStringList gameMain::getCheckedBoxes(){
     QStringList checkedBoxes = {};
     if(ui->panstwoCheckBox->isChecked()){
-        checkedBoxes << ui->panstwoLabel->text();
+        checkedBoxes << "panstwo";
     }
     if(ui->miastoCheckBox->isChecked()){
-        checkedBoxes << ui->miastoLabel->text();
+        checkedBoxes << "miasto";
     }
     if(ui->zwierzeCheckBox->isChecked()){
-        checkedBoxes << ui->zwierzeLabel->text();
+        checkedBoxes << "zwierze";
     }
     if(ui->roslinaCheckBox->isChecked()){
-        checkedBoxes << ui->roslinaLabel->text();
+        checkedBoxes << "roslina";
     }
     if(ui->imieCheckBox->isChecked()){
-        checkedBoxes << ui->imieLabel->text();
+        checkedBoxes << "imie";
     }
     if(ui->wodyCheckBox->isChecked()){
-        checkedBoxes << ui->wodyLabel->text();
+        checkedBoxes << "wody";
     }
     if(ui->przedmiotCheckBox->isChecked()){
-        checkedBoxes << ui->przedmiotLabel->text();
+        checkedBoxes << "przedmiot";
     }
     if(ui->slawnaOsobaCheckBox->isChecked()){
-        checkedBoxes << ui->slawnaOsobaLabel->text();
+        checkedBoxes << "slawnaOsoba";
     }
 
     return checkedBoxes;

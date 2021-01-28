@@ -3,6 +3,8 @@
 
 Application::Application(QWidget * parent) : QMainWindow(parent)
 {
+    voteWindow = new vote(this);
+    voteWindow->hide();
     login = new Login(this);
     gamemain = new gameMain(this);
     gamemain->hide();
@@ -162,6 +164,7 @@ void Application::readyRead()
             }
         }
         if(action[0] == 's'){
+            voteWindow->hide();
             gamemain->setSendAnswerButtonEnable();
             roundSeconds = 180;
             action = action.mid(1, action.length()-1);
@@ -204,6 +207,62 @@ void Application::readyRead()
             gamemain->setTime(roundSeconds);
             QMessageBox mb;
             mb.information(gamemain, "Informacja", "Pozostało 20 sekund, pierwszy z graczy zgłosił swoje odpowiedzi!");
+        }
+        if(action[0] == "o"){
+            int whereComma = -1;
+            QString tmp;
+            action = action.mid(1, action.length() - 1);
+            for(int i = 0; i < action.length(); i++){
+                if(action[i] == ','){
+                    tmp = action.mid(whereComma + 1, i - whereComma + 1);
+                    if(tmp[0] == "1"){
+                        tmp = tmp.mid(1, tmp.length() - 1);
+                        voteWindow->addToCountryWidgetList(tmp);
+
+                    }
+                    else if(tmp[0] == "2"){
+                        tmp = tmp.mid(1, tmp.length() - 1);
+                        voteWindow->addToCityWidgetList(tmp);
+
+                    }
+                    else if(tmp[0] == "3"){
+                        tmp = tmp.mid(1, tmp.length() - 1);
+                        voteWindow->addToAnimalWidgetList(tmp);
+
+                    }
+                    else if(tmp[0] == "4"){
+                        tmp = tmp.mid(1, tmp.length() - 1);
+                        voteWindow->addToPlantWidgetList(tmp);
+
+                    }
+                    else if(tmp[0] == "5"){
+                        tmp = tmp.mid(1, tmp.length() - 1);
+                        voteWindow->addToNameWidgetList(tmp);
+
+                    }
+                    else if(tmp[0] == "6"){
+                        tmp = tmp.mid(1, tmp.length() - 1);
+                        voteWindow->addToWaterWidgetList(tmp);
+
+                    }
+                    else if(tmp[0] == "7"){
+                        tmp = tmp.mid(1, tmp.length() - 1);
+                        voteWindow->addToThingWidgetList(tmp);
+
+                    }
+                    else{
+                        tmp = tmp.mid(1, tmp.length() - 1);
+                        voteWindow->addToFamousPersonWidgetList(tmp);
+
+                    }
+
+                    whereComma = i;
+                }
+            }
+
+
+            gamemain->hide();
+            voteWindow->show();
         }
     }
 }

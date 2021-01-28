@@ -173,182 +173,6 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>110</y>
-     <width>271</width>
-     <height>601</height>
-    </rect>
-   </property>
-   <layout class="QFormLayout" name="formLayout">
-    <item row="0" column="1">
-     <widget class="QLabel" name="panstwoLabel">
-      <property name="text">
-       <string>Państwo</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="QCheckBox" name="panstwoCheckBox">
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QTextEdit" name="panstwoTextEdit">
-      <property name="lineWidth">
-       <number>1</number>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QLabel" name="miastoLabel">
-      <property name="text">
-       <string>Miasto</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0">
-     <widget class="QCheckBox" name="miastoCheckBox">
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="1">
-     <widget class="QLabel" name="zwierzeLabel">
-      <property name="text">
-       <string>Zwierze</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="0">
-     <widget class="QCheckBox" name="zwierzeCheckBox">
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="1">
-     <widget class="QTextEdit" name="zwierzeTextEdit"/>
-    </item>
-    <item row="6" column="1">
-     <widget class="QLabel" name="roslinaLabel">
-      <property name="text">
-       <string>Roślina</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="0">
-     <widget class="QCheckBox" name="roslinaCheckBox">
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="1">
-     <widget class="QTextEdit" name="roslinaTextEdit"/>
-    </item>
-    <item row="8" column="1">
-     <widget class="QLabel" name="imieLabel">
-      <property name="text">
-       <string>Imię</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="9" column="0">
-     <widget class="QCheckBox" name="imieCheckBox">
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-    <item row="9" column="1">
-     <widget class="QTextEdit" name="imieTextEdit"/>
-    </item>
-    <item row="10" column="1">
-     <widget class="QLabel" name="wodyLabel">
-      <property name="text">
-       <string>Wody</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="11" column="0">
-     <widget class="QCheckBox" name="wodyCheckBox">
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-    <item row="11" column="1">
-     <widget class="QTextEdit" name="wodyTextEdit"/>
-    </item>
-    <item row="12" column="1">
-     <widget class="QLabel" name="przedmiotLabel">
-      <property name="text">
-       <string>Przedmiot</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="13" column="0">
-     <widget class="QCheckBox" name="przedmiotCheckBox">
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-    <item row="13" column="1">
-     <widget class="QTextEdit" name="przedmiotTextEdit"/>
-    </item>
-    <item row="14" column="1">
-     <widget class="QLabel" name="slawnaOsobaLabel">
-      <property name="text">
-       <string>Sławna osoba</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="15" column="0">
-     <widget class="QCheckBox" name="slawnaOsobaCheckBox">
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-    <item row="15" column="1">
-     <widget class="QTextEdit" name="slawnaOsobaTextEdit"/>
-    </item>
-    <item row="3" column="1">
-     <widget class="QTextEdit" name="miastoTextEdit"/>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QWidget" name="layoutWidget">
-   <property name="geometry">
-    <rect>
      <x>440</x>
      <y>10</y>
      <width>291</width>
@@ -389,6 +213,210 @@
        <widget class="QListWidget" name="punktyListWidget"/>
       </item>
      </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>11</x>
+     <y>111</y>
+     <width>251</width>
+     <height>601</height>
+    </rect>
+   </property>
+   <layout class="QFormLayout" name="kategorieLayout">
+    <item row="0" column="1">
+     <widget class="QLabel" name="panstwoLabel">
+      <property name="text">
+       <string>Państwo</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QCheckBox" name="panstwoCheckBox">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLineEdit" name="panstwoTextEdit">
+      <property name="maxLength">
+       <number>30</number>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QLabel" name="miastoLabel">
+      <property name="text">
+       <string>Miasto</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QCheckBox" name="miastoCheckBox">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QLineEdit" name="miastoTextEdit">
+      <property name="maxLength">
+       <number>30</number>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1">
+     <widget class="QLabel" name="zwierzeLabel">
+      <property name="text">
+       <string>Zwierze</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0">
+     <widget class="QCheckBox" name="zwierzeCheckBox">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QLineEdit" name="zwierzeTextEdit">
+      <property name="maxLength">
+       <number>30</number>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="1">
+     <widget class="QLabel" name="roslinaLabel">
+      <property name="text">
+       <string>Roślina</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="0">
+     <widget class="QCheckBox" name="roslinaCheckBox">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="1">
+     <widget class="QLineEdit" name="roslinaTextEdit">
+      <property name="maxLength">
+       <number>30</number>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="1">
+     <widget class="QLabel" name="imieLabel">
+      <property name="text">
+       <string>Imię</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="0">
+     <widget class="QCheckBox" name="imieCheckBox">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="1">
+     <widget class="QLineEdit" name="imieTextEdit">
+      <property name="maxLength">
+       <number>30</number>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="1">
+     <widget class="QLabel" name="wodyLabel">
+      <property name="text">
+       <string>Wody</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="0">
+     <widget class="QCheckBox" name="wodyCheckBox">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="1">
+     <widget class="QLineEdit" name="wodyTextEdit">
+      <property name="maxLength">
+       <number>30</number>
+      </property>
+     </widget>
+    </item>
+    <item row="12" column="1">
+     <widget class="QLabel" name="przedmiotLabel">
+      <property name="text">
+       <string>Przedmiot</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="13" column="0">
+     <widget class="QCheckBox" name="przedmiotCheckBox">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="13" column="1">
+     <widget class="QLineEdit" name="przedmiotTextEdit">
+      <property name="maxLength">
+       <number>30</number>
+      </property>
+     </widget>
+    </item>
+    <item row="14" column="1">
+     <widget class="QLabel" name="slawnaOsobaLabel">
+      <property name="text">
+       <string>Sławna osoba</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="15" column="0">
+     <widget class="QCheckBox" name="slawnaOsobaCheckBox">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="15" column="1">
+     <widget class="QLineEdit" name="slawnaOsobaTextEdit">
+      <property name="maxLength">
+       <number>30</number>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>

@@ -54,6 +54,10 @@ void gameMain::setStartButtonDisabled()
     ui->startButton->setEnabled(false);
 }
 
+void gameMain::setStartButtonEnabled(){
+    ui->startButton->setEnabled(true);
+}
+
 void gameMain::setEditRoundsTextEditDisabled()
 {
     ui->iloscRundTextEdit->setReadOnly(true);
@@ -259,3 +263,15 @@ QString gameMain::getAnswers(){
     answers = answers.toLower();
     return answers;
 }
+
+void gameMain::setCheckBoxesEnabled(){
+    ui->panstwoCheckBox->setEnabled(true);
+    ui->miastoCheckBox->setEnabled(true);
+    ui->zwierzeCheckBox->setEnabled(true);
+    ui->roslinaCheckBox->setEnabled(true);
+    ui->imieCheckBox->setEnabled(true);
+    ui->wodyCheckBox->setEnabled(true);
+    ui->przedmiotCheckBox->setEnabled(true);
+    ui->slawnaOsobaCheckBox->setEnabled(true);
+}
+

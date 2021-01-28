@@ -18,12 +18,16 @@ private:
     Login * login;
     QTcpSocket * sock;
     QTimer * connectionTimeoutTimer;
+    QTimer * roundTimer;
+    int roundSeconds;
 public:
     explicit Application(QWidget * parent = nullptr);
     ~Application();
     void connectButtonHit();
 
     void startButtonHit();
+
+    void sendAnswersButtonHit();
 
     void connected();
     void disconnected();
@@ -32,6 +36,8 @@ public:
     void sendMessage(QString message);
 
     void closeAll();
+
+    void updateTime();
 };
 
 #endif // APPLICATION_H

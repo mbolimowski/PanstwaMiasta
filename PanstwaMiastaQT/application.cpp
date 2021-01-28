@@ -9,6 +9,7 @@ Application::Application(QWidget * parent) : QMainWindow(parent)
     login->show();
     login->setIpAddr("localhost");
     login->setPort("5000");
+    roundTimer = new QTimer();
     if(login->readUsername() == -1)
     {
         closeAll();
@@ -16,8 +17,9 @@ Application::Application(QWidget * parent) : QMainWindow(parent)
     }
     connect(login->getConnectButton(), &QPushButton::clicked, this, &Application::connectButtonHit);
     connect(gamemain->getStartButton(), &QPushButton::clicked, this, &Application::startButtonHit);
+    connect(gamemain->getSendAnswerButton(), &QPushButton::clicked, this, &Application::sendAnswersButtonHit);
+    connect(roundTimer, &QTimer::timeout, this, &Application::updateTime);
 }
-
 
 Application::~Application()
 {
@@ -25,6 +27,7 @@ Application::~Application()
     delete login;
     delete gamemain;
     delete connectionTimeoutTimer;
+    delete roundTimer;
 }
 
 void Application::sendMessage(QString message){
@@ -65,6 +68,18 @@ void Application::startButtonHit(){
         }
         sendMessage("s" + message + "\n");
     }
+}
+
+void Application::sendAnswersButtonHit(){
+    QString message = "";
+    if(gamemain->isSendingAnswerCorrect() == 1){
+        sendMessage("z\n");
+    }
+    else {
+        QMessageBox messageBox;
+        messageBox.critical(this, "Błąd", "Należy wypełnic wszystkie wymagane pola aby zglosić odpowiedzi!");
+    }
+
 }
 
 
@@ -146,6 +161,7 @@ void Application::readyRead()
             }
         }
         if(action[0] == 's'){
+            roundSeconds = 180;
             action = action.mid(1, action.length()-1);
             QString rounds;
             QString letter;
@@ -178,6 +194,13 @@ void Application::readyRead()
                     else if(tmp == '8') gamemain->setFamousPersonTextEditEnabled();
                 }
             }
+            roundTimer->start(1000);
+        }
+        if(action[0] == "z"){
+            roundSeconds = 21;
+            gamemain->setTime(roundSeconds);
+            QMessageBox mb;
+            mb.information(gamemain, "Informacja", "Pozostało 20 sekund, pierwszy z graczy zgłosił swoje odpowiedzi!");
         }
     }
 }
@@ -189,3 +212,7 @@ void Application::closeAll()
     gamemain->close();
 }
 
+void Application::updateTime(){
+    roundSeconds--;
+    gamemain->setTime(roundSeconds);
+}

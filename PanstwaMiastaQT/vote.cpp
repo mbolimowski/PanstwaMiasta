@@ -129,8 +129,8 @@ void vote::addToSpecialWidgetList(QString category){
     QListWidget * currentWidget = getWidget(whichWidget);
     QString tmpCategory = category.mid(1, category.length() - 1);
     if(!checkPresenceOfElementInListWidget(tmpCategory)){
-        currentWidget->addItem(tmpCategory);
-        addElementToList(tmpCategory);
+        currentWidget->addItem(category);
+        addElementToList(category);
     }
 }
 

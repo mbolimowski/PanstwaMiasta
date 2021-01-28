@@ -49,7 +49,8 @@ void cleanAnswers(Client * client);
 void allAnswers(Client * omittedClient, char * buffer);
 void sendAllAnswers();
 void readVotes(char * message, int msglen);
-
+void calcClientsPoints();
+void cleanBeforeNextRound();
 
 struct Handler {
     virtual ~Handler(){}
@@ -94,6 +95,7 @@ public:
     int fd() const {return _fd;}
     char * getName() {return name;}
     int getPoints() {return points;}
+    void addPoints(int pt) {points+=pt;}
     std::vector<std::string> * getAnswers(){return answers;}
     virtual void handleEvent(uint32_t events) override {
         if(events & EPOLLIN) {
@@ -139,18 +141,21 @@ public:
                             if(numberOfResponses == (int)clients.size())
                             {
                                 sendAllAnswers();
+                                answerMode = false;
                                 numberOfResponses = 0;
                             }
                         }
                         if(readBuffer.data[0] == 'g')
                         {   
-
                             readVotes(readBuffer.data, thismsglen);
                             numberOfResponses++;
                             if(numberOfResponses == (int)clients.size())
                             {
+                                calcClientsPoints();
                                 
-                                numberOfResponses = 0;
+                                cleanBeforeNextRound();
+                                gameInfo(readBuffer.data);
+                                startRound();
                             }
 
                         }
@@ -486,23 +491,59 @@ void calcClientsPoints()
 {
     for(Client * client : clients)
     {
+        int halfClients = 0;
+        if((int)clients.size() % 2 == 0)
+        {
+            halfClients = (int)clients.size()/2;
+        }
+        else{
+            halfClients = ((int)clients.size()-1)/2;
+        }
         for(int i=0;i<(int)client->getAnswers()->size();i++)
         {
             std::string answer = (*client->getAnswers())[i];
             if(answersVotes.find(answer) != answersVotes.end())
             {
-                /*
-                int halfClients = 0;
-                if((int)clients.size() )
-                if(answersVotes[answer] )
-                */
-            }
-            else{
-                
+                if(answersVotes[answer] >= halfClients)
+                {
+                    int answerRepeat = 0;
+                    for(Client * tmpClient : clients)
+                    {
+                        if(client->fd()!=tmpClient->fd())
+                        {
+                        
+                        for(int i=0;i<(int)tmpClient->getAnswers()->size();i++)
+                        {
+                            if(answer == (*tmpClient->getAnswers())[i])
+                            {
+                                answerRepeat++;
+                            }
+                        }
+                        }
+                    }
+                    if(answerRepeat == 0)
+                    {
+                        client->addPoints(10);
+                    }
+                    else{
+                        client->addPoints(5);
+                    }
+                }
             }
         }
-
-
-
     }
+}
+
+
+
+void cleanBeforeNextRound()
+{
+    numberOfResponses = 0;
+    rounds--;
+    answerMode = true;
+    for(Client * client : clients)
+    {
+        cleanAnswers(client);
+    }
+    answersVotes.clear();
 }

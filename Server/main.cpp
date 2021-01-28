@@ -172,6 +172,7 @@ public:
                                     {
                                         startOptions(tmpClient);
                                     }
+                                    sendPlayersInfo();
                                 }
                                 else{
                                 startRound();

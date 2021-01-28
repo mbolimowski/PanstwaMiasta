@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QListWidgetItem>
 #include <QList>
+#include <QDebug>
 
 namespace Ui {
 class vote;

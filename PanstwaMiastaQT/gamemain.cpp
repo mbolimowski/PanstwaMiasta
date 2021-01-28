@@ -33,7 +33,6 @@ void gameMain::setCategoriesDisabled()
     ui->wodyTextEdit->setReadOnly(true);
     ui->przedmiotTextEdit->setReadOnly(true);
     ui->slawnaOsobaTextEdit->setReadOnly(true);
-    ui->zglosButton->setEnabled(false);
 }
 
 

@@ -193,7 +193,7 @@ void Application::readyRead()
             gamemain->setCheckboxesDisabled();
             gamemain->setStartButtonDisabled();
             gamemain->setEditRoundsTextEditDisabled();
-
+            gamemain->setCategoriesDisabled();
 
             gamemain->show();
             voteWindow->hide();

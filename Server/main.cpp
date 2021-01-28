@@ -13,12 +13,21 @@
 #include <list>
 #include <iostream>
 #include <signal.h>
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <vector>
+#include <string.h>
 
 class Client;
 int servFd;
 int epollFd;
 bool gameStarted;
 std::unordered_set<Client*> clients;
+
+int rounds = 0;
+std::vector<int> categories;
+
 void ctrl_c(int);
 void sendToAllBut(int fd, char * buffer, int count);
 void sendToAll(char * buffer, int count);
@@ -26,7 +35,9 @@ uint16_t readPort(char * txt);
 void setReuseAddr(int sock);
 void startOptions(Client * client);
 void sendPlayersInfo();
-
+char randomNumber();
+void gameInfo(char * message);
+void startRound();
 
 
 struct Handler {
@@ -94,8 +105,8 @@ public:
                         if(readBuffer.data[0] == 's')
                         {
                             gameStarted = true;
-                            std::cout << "gra sie rozpoczela!" <<std::endl;
-                            std::cout << readBuffer.data << std::endl;
+                            gameInfo(readBuffer.data);
+                            startRound();
                         }
                         //sendToAllBut(_fd, readBuffer.data, thismsglen);
                         auto nextmsgslen =  readBuffer.pos - thismsglen;
@@ -284,5 +295,60 @@ void sendPlayersInfo()
     }
     std::cout << message <<std::endl;
     strcat(message, "\n");
+    sendToAll(message, strlen(message));
+}
+
+
+char randomNumber()
+{
+    srand(time(NULL));
+    char number = rand() % 26 + 65;
+    return number;
+}
+
+
+
+void gameInfo(char * message)
+{
+    bool ifRounds = true;
+    for(int i=1;i<(int)strlen(message);i++)
+    {
+        if(message[i] == ',' && ifRounds)
+        {
+            char * charRounds;
+            strncpy(charRounds, message+1, i-1);
+            rounds = atoi(charRounds); 
+            std::cout << rounds<<std::endl;
+            ifRounds = false;
+        }
+        if(message[i] == ',' && !ifRounds)
+        {
+            categories.push_back(message[i-1]%48+1);
+            std::cout << message[i-1] % 48+ 1;
+        }
+    }
+}
+
+
+
+void startRound()
+{
+
+    char message[255];
+    memset(message, 0, 255);
+    strcpy(message, "s\0");
+    std::string tmp = std::to_string(rounds);
+    char const * charRounds = tmp.c_str();
+    strncat(message, charRounds, strlen(charRounds));
+    char tmp2[3] = {',' , randomNumber(), ','};
+    strncat(message, tmp2, 3);
+    memset(tmp2, 0 , 3);
+    for(int i = 0; i < (int)categories.size();i++)
+    {
+        char tmp3[2] = {(char)(categories[i]+48), ','};
+        strncat(message,tmp3,3);
+        memset(tmp3,0,2);
+    }
+    std::cout << message << std::endl;
     sendToAll(message, strlen(message));
 }

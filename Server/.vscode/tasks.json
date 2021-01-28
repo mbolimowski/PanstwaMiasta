@@ -9,7 +9,7 @@
 				"-g",
 				"main.cpp",
 				"-o",
-				"serwer"
+				"server"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"

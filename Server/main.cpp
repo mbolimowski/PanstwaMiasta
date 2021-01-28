@@ -152,10 +152,10 @@ public:
                             if(numberOfResponses == (int)clients.size())
                             {
                                 calcClientsPoints();
-                                
+                                sendPlayersInfo();
                                 cleanBeforeNextRound();
-                                gameInfo(readBuffer.data);
                                 startRound();
+                                
                             }
 
                         }
@@ -539,7 +539,6 @@ void calcClientsPoints()
 void cleanBeforeNextRound()
 {
     numberOfResponses = 0;
-    rounds--;
     answerMode = true;
     for(Client * client : clients)
     {

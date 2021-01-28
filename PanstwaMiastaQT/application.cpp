@@ -88,8 +88,6 @@ void Application::sendAnswersButtonHit(){
 
 void Application::voteButtonHit(){
     sendMessage("g" + voteWindow->getVoices() + "\n");
-    voteWindow->hide();
-    gamemain->show();
 }
 
 
@@ -172,6 +170,7 @@ void Application::readyRead()
         }
         if(action[0] == 's'){
             voteWindow->hide();
+            gamemain->show();
             gamemain->setSendAnswerButtonEnable();
             roundSeconds = 180;
             action = action.mid(1, action.length()-1);
@@ -223,28 +222,36 @@ void Application::readyRead()
                 if(action[i] == ','){
                     tmp = action.mid(whereComma + 1, i - whereComma - 1);
                     if(tmp[0] == "1"){
-                        voteWindow->addToCountryWidgetList(tmp);
+                        //voteWindow->addToCountryWidgetList(tmp);
+                        voteWindow->addToSpecialWidgetList(tmp);
                     }
                     else if(tmp[0] == "2"){
-                        voteWindow->addToCityWidgetList(tmp);
+                        //voteWindow->addToCityWidgetList(tmp);
+                        voteWindow->addToSpecialWidgetList(tmp);
                     }
                     else if(tmp[0] == "3"){
-                        voteWindow->addToAnimalWidgetList(tmp);
+                        //voteWindow->addToAnimalWidgetList(tmp);
+                        voteWindow->addToSpecialWidgetList(tmp);
                     }
                     else if(tmp[0] == "4"){
-                        voteWindow->addToPlantWidgetList(tmp);
+                        //voteWindow->addToPlantWidgetList(tmp);
+                        voteWindow->addToSpecialWidgetList(tmp);
                     }
                     else if(tmp[0] == "5"){
-                        voteWindow->addToNameWidgetList(tmp);
+                        //voteWindow->addToNameWidgetList(tmp);
+                        voteWindow->addToSpecialWidgetList(tmp);
                     }
                     else if(tmp[0] == "6"){
-                        voteWindow->addToWaterWidgetList(tmp);
+                        //voteWindow->addToWaterWidgetList(tmp);
+                        voteWindow->addToSpecialWidgetList(tmp);
                     }
                     else if(tmp[0] == "7"){
-                        voteWindow->addToThingWidgetList(tmp);
+                        //voteWindow->addToThingWidgetList(tmp);
+                        voteWindow->addToSpecialWidgetList(tmp);
                     }
                     else{
-                        voteWindow->addToFamousPersonWidgetList(tmp);
+                        //voteWindow->addToFamousPersonWidgetList(tmp);
+                        voteWindow->addToSpecialWidgetList(tmp);
                     }
                     whereComma = i;
                 }

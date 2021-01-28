@@ -59,7 +59,7 @@ class Client : public Handler {
     int _fd;
     char name[255];
     int points;
-    std::vector<char *> * answers;
+    std::vector<std::string> * answers;
     struct Buffer {
         Buffer() {data = (char*) malloc(len);}
         Buffer(const char* srcData, ssize_t srcLen) : len(srcLen) {data = (char*) malloc(len); memcpy(data, srcData, len);}
@@ -84,7 +84,7 @@ public:
         epoll_ctl(epollFd, EPOLL_CTL_ADD, _fd, &ee);
         memset(name,0,255);
         points = 0;
-        answers = new std::vector<char*>();
+        answers = new std::vector<std::string>();
     }
     virtual ~Client(){
         epoll_ctl(epollFd, EPOLL_CTL_DEL, _fd, nullptr);
@@ -94,7 +94,7 @@ public:
     int fd() const {return _fd;}
     char * getName() {return name;}
     int getPoints() {return points;}
-    std::vector<char*> * getAnswers(){return answers;}
+    std::vector<std::string> * getAnswers(){return answers;}
     virtual void handleEvent(uint32_t events) override {
         if(events & EPOLLIN) {
             ssize_t count = read(_fd, readBuffer.dataPos(), readBuffer.remaining());
@@ -135,11 +135,12 @@ public:
                             std::cout << readBuffer.data<<std::endl;
                             readAnswers(this, readBuffer.data, thismsglen);
                             numberOfResponses ++;
-                            /*if(numberOfResponses == (int)clients.size())
+                            std::cout << "numberOfResponses" << numberOfResponses<<std::endl;
+                            if(numberOfResponses == (int)clients.size())
                             {
                                 sendAllAnswers();
                                 numberOfResponses = 0;
-                            }*/
+                            }
                         }
                         if(readBuffer.data[0] == 'g')
                         {
@@ -401,10 +402,9 @@ void readAnswers(Client * client, char * answers, int msglen)
         {
             char answer[31];
             memset(answer,0,31);
-            
             strncpy(answer, answers+pos, i-pos);
-            std::cout << answer << std::endl;
-            client->getAnswers()->push_back(answer);
+            std::string strAnswer(answer);
+            client->getAnswers()->push_back(strAnswer);
             pos = i+1;
         }
     }
@@ -412,10 +412,6 @@ void readAnswers(Client * client, char * answers, int msglen)
 
 void cleanAnswers(Client * client)
 {
-    for(auto it = client->getAnswers()->begin(); it != client->getAnswers()->end(); it++)
-    {
-        memset(*it, 0, 31);
-    }
     client->getAnswers()->clear();
     client->getAnswers()->shrink_to_fit();
 }
@@ -427,12 +423,14 @@ void allAnswers(Client * omittedClient, char * buffer)
     for(Client * client : clients)
     {
         if(client->fd() != omittedClient->fd())
+        {
         for(auto it = client->getAnswers()->begin(); it != client->getAnswers()->end(); it++)
         {
-            strncat(buffer, (*it) , strlen(*it));
+            strncat(buffer, (*it).c_str() , strlen((*it).c_str()));
             strcat(buffer,",\0");
         }
         strcat(buffer,";");
+        }
     }
     strcat(buffer,"\n");
     std::cout <<"AllAnswers: " <<  buffer<< std::endl;

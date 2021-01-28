@@ -292,7 +292,7 @@ void Application::closeAll()
 }
 
 void Application::updateTime(){
-    if(roundSeconds == 18){
+    if(roundSeconds == 0){
         QString message = "o" + gamemain->getAnswers() + "\n";
         sendMessage(message);
         roundTimer->stop();

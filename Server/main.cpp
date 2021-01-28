@@ -135,11 +135,11 @@ public:
                             std::cout << readBuffer.data<<std::endl;
                             readAnswers(this, readBuffer.data, thismsglen);
                             numberOfResponses ++;
-                            if(numberOfResponses == (int)clients.size())
+                            /*if(numberOfResponses == (int)clients.size())
                             {
                                 sendAllAnswers();
                                 numberOfResponses = 0;
-                            }
+                            }*/
                         }
                         if(readBuffer.data[0] == 'g')
                         {
@@ -400,7 +400,8 @@ void readAnswers(Client * client, char * answers, int msglen)
         if(answers[i] == ',')
         {
             char answer[31];
-            memset(answer,0,100);
+            memset(answer,0,31);
+            
             strncpy(answer, answers+pos, i-pos);
             std::cout << answer << std::endl;
             client->getAnswers()->push_back(answer);

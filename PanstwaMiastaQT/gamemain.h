@@ -17,6 +17,10 @@ public:
     ~gameMain();
     Ui::gameMain * getUi();
 
+    void setSendAnswerButtonEnable();
+
+    void setSendAnswerButtonDisable();
+
     void setCategoriesDisabled();
 
     void setCheckboxesDisabled();
@@ -41,6 +45,10 @@ public:
 
     QPushButton * getStartButton();
 
+    QPushButton * getSendAnswerButton();
+
+    int isSendingAnswerCorrect();
+
     void setCountryTextEditEnabled();
 
     void setCityTextEditEnabled();
@@ -62,6 +70,10 @@ public:
     void setRounds(QString rounds);
 
     void setLetter(QString letter);
+
+    void setTime(int seconds);
+
+    QString getAnswers();
 
 private:
     Ui::gameMain *ui;

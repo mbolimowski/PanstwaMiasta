@@ -14,6 +14,15 @@ gameMain::~gameMain()
 }
 
 
+void gameMain::setSendAnswerButtonEnable(){
+    ui->zglosButton->setEnabled(true);
+}
+
+void gameMain::setSendAnswerButtonDisable(){
+    ui->zglosButton->setEnabled(false);
+}
+
+
 void gameMain::setCategoriesDisabled()
 {
     ui->panstwoTextEdit->setReadOnly(true);
@@ -139,6 +148,38 @@ QPushButton * gameMain::getStartButton(){
     return ui->startButton;
 }
 
+QPushButton * gameMain::getSendAnswerButton(){
+    return ui->zglosButton;
+}
+
+int gameMain::isSendingAnswerCorrect(){
+    if(ui->panstwoTextEdit->isEnabled() && ui->panstwoTextEdit->toPlainText() == ""){
+        return -1;
+    }
+    if(ui->miastoTextEdit->isEnabled() && ui->miastoTextEdit->toPlainText() == ""){
+        return -1;
+    }
+    if(ui->zwierzeTextEdit->isEnabled() && ui->zwierzeTextEdit->toPlainText() == ""){
+        return -1;
+    }
+    if(ui->roslinaTextEdit->isEnabled() && ui->roslinaTextEdit->toPlainText() == ""){
+        return -1;
+    }
+    if(ui->imieTextEdit->isEnabled() && ui->imieTextEdit->toPlainText() == ""){
+        return -1;
+    }
+    if(ui->wodyTextEdit->isEnabled() && ui->wodyTextEdit->toPlainText() == ""){
+        return -1;
+    }
+    if(ui->przedmiotTextEdit->isEnabled() && ui->przedmiotTextEdit->toPlainText() == ""){
+        return -1;
+    }
+    if(ui->slawnaOsobaTextEdit->isEnabled() && ui->slawnaOsobaTextEdit->toPlainText() == ""){
+        return -1;
+    }
+    return 1;
+}
+
 void gameMain::setCountryTextEditEnabled(){
     ui->panstwoTextEdit->setReadOnly(false);
 }
@@ -182,4 +223,39 @@ void gameMain::setRounds(QString rounds){
 
 void gameMain::setLetter(QString letter){
     ui->aktualnaLiteraLabel->setText(letter);
+}
+
+void gameMain::setTime(int seconds){
+    ui->aktualnyCzasLabel->setText(QString::number(seconds));
+}
+
+QString gameMain::getAnswers(){
+    QString answers = "";
+
+    if(ui->panstwoTextEdit->isEnabled()){
+        answers += ui->panstwoTextEdit->toPlainText() + ",";
+    }
+    if(ui->miastoTextEdit->isEnabled()){
+        answers += ui->miastoTextEdit->toPlainText() + ",";
+    }
+    if(ui->zwierzeTextEdit->isEnabled()){
+        answers += ui->zwierzeTextEdit->toPlainText() + ",";
+    }
+    if(ui->roslinaTextEdit->isEnabled()){
+        answers += ui->roslinaTextEdit->toPlainText() + ",";
+    }
+    if(ui->imieTextEdit->isEnabled()){
+        answers += ui->imieTextEdit->toPlainText() + ",";
+    }
+    if(ui->wodyTextEdit->isEnabled()){
+        answers += ui->wodyTextEdit->toPlainText() + ",";
+    }
+    if(ui->przedmiotTextEdit->isEnabled()){
+        answers += ui->przedmiotTextEdit->toPlainText() + ",";
+    }
+    if(ui->slawnaOsobaTextEdit->isEnabled()){
+        answers += ui->slawnaOsobaTextEdit->toPlainText() + ",";
+    }
+
+    return answers;
 }

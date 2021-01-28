@@ -151,10 +151,10 @@ public:
                             numberOfResponses++;
                             if(numberOfResponses == (int)clients.size())
                             {
-                                calcClientsPoints();
-                                sendPlayersInfo();
+                                calcClientsPoints();    
                                 cleanBeforeNextRound();
                                 startRound();
+                                sendPlayersInfo();
                                 
                             }
 

@@ -232,28 +232,28 @@ void gameMain::setTime(int seconds){
 QString gameMain::getAnswers(){
     QString answers = "";
 
-    if(ui->panstwoTextEdit->isReadOnly(false)){
+    if(!ui->panstwoTextEdit->isReadOnly()){
         answers += "1" + ui->panstwoTextEdit->text() + ",";
     }
-    if(ui->miastoTextEdit->isReadOnly(false)){
+    if(!ui->miastoTextEdit->isReadOnly()){
         answers += "2" + ui->miastoTextEdit->text() + ",";
     }
-    if(ui->zwierzeTextEdit->isReadOnly(false)){
+    if(!ui->zwierzeTextEdit->isReadOnly()){
         answers += "3" + ui->zwierzeTextEdit->text() + ",";
     }
-    if(ui->roslinaTextEdit->isReadOnly(false)){
+    if(!ui->roslinaTextEdit->isReadOnly()){
         answers += "4" + ui->roslinaTextEdit->text() + ",";
     }
-    if(ui->imieTextEdit->isReadOnly(false)){
+    if(!ui->imieTextEdit->isReadOnly()){
         answers += "5" + ui->imieTextEdit->text() + ",";
     }
-    if(ui->wodyTextEdit->isReadOnly(false)){
+    if(!ui->wodyTextEdit->isReadOnly()){
         answers += "6" + ui->wodyTextEdit->text() + ",";
     }
-    if(ui->przedmiotTextEdit->isReadOnly(false)){
+    if(!ui->przedmiotTextEdit->isReadOnly()){
         answers += "7" + ui->przedmiotTextEdit->text() + ",";
     }
-    if(ui->slawnaOsobaTextEdit->isReadOnly(false)){
+    if(!ui->slawnaOsobaTextEdit->isReadOnly()){
         answers += "8" + ui->slawnaOsobaTextEdit->text() + ",";
     }
     answers = answers.toLower();

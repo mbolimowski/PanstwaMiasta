@@ -132,6 +132,7 @@ public:
                         }
                         if(readBuffer.data[0] == 'o')
                         {
+                            std::cout << readBuffer.data<<std::endl;
                             readAnswers(this, readBuffer.data, thismsglen);
                             numberOfResponses ++;
                             if(numberOfResponses == (int)clients.size())

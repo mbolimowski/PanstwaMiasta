@@ -163,7 +163,8 @@ public:
                             {
                                 calcClientsPoints();    
                                 cleanBeforeNextRound();
-                                if(rounds == 1)
+                                rounds--;
+                                if(rounds == 0)
                                 {
                                     cleanAllNextGame();
                                     gameStarted =false;
@@ -176,6 +177,7 @@ public:
                                 }
                                 else{
                                 startRound();
+                                answerMode = true;
                                 sendPlayersInfo();
                                 }
                             }
@@ -267,7 +269,7 @@ class : Handler {
             else{
             startRound();
             }
-                        sendPlayersInfo();
+            sendPlayersInfo();
             }
         }
         if(events & ~EPOLLIN){
@@ -410,7 +412,7 @@ void gameInfo(char * message)
             char charRounds[255];
             memset(charRounds,0,255);
             strncpy(charRounds, message+1, i-1);
-            rounds = atoi(charRounds) + 1; 
+            rounds = atoi(charRounds); 
             ifRounds = false;
             continue;
         }
@@ -429,7 +431,7 @@ void startRound()
     char message[255];
     memset(message, 0, 255);
     strcpy(message, "s\0");
-    std::string tmp = std::to_string(--rounds);
+    std::string tmp = std::to_string(rounds);
     char const * charRounds = tmp.c_str();
     strncat(message, charRounds, strlen(charRounds));
     char tmp2[3] = {',' , randomNumber(), ','};

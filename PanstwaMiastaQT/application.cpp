@@ -143,6 +143,7 @@ void Application::readyRead()
             gamemain->setEditRoundsTextEditEnabled();
             gamemain->setCheckBoxesEnabled();
             gamemain->setCategoriesDisabled();
+            gamemain->show();
             QMessageBox mb;
             mb.information(gamemain, "Informacja", "Zostałeś właścicielem! Oznacza to, że możesz wybrać kategorie dostępne w następnej grze oraz ilość rund. Kliknij przycisk start gdy będziesz gotowy!");
 
@@ -156,6 +157,7 @@ void Application::readyRead()
             gamemain->setCategoriesDisabled();
             gamemain->setStartButtonDisabled();
             gamemain->setEditRoundsTextEditDisabled();
+            gamemain->show();
             QMessageBox mb;
             mb.information(gamemain, "Informacja", "Poczekaj, aż właściciel poczekalni rozpocznie grę!");
         }

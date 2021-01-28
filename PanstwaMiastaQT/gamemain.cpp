@@ -153,28 +153,28 @@ QPushButton * gameMain::getSendAnswerButton(){
 }
 
 int gameMain::isSendingAnswerCorrect(){
-    if(!ui->panstwoTextEdit->isReadOnly()  && ui->panstwoTextEdit->toPlainText().isEmpty()){
+    if(!ui->panstwoTextEdit->isReadOnly()  && ui->panstwoTextEdit->text().isEmpty()){
         return -1;
     }
-    if(!ui->miastoTextEdit->isReadOnly() && ui->miastoTextEdit->toPlainText().isEmpty()){
+    if(!ui->miastoTextEdit->isReadOnly() && ui->miastoTextEdit->text().isEmpty()){
         return -1;
     }
-    if(!ui->zwierzeTextEdit->isReadOnly()  && ui->zwierzeTextEdit->toPlainText().isEmpty()){
+    if(!ui->zwierzeTextEdit->isReadOnly()  && ui->zwierzeTextEdit->text().isEmpty()){
         return -1;
     }
-    if(!ui->roslinaTextEdit->isReadOnly()  && ui->roslinaTextEdit->toPlainText().isEmpty()){
+    if(!ui->roslinaTextEdit->isReadOnly()  && ui->roslinaTextEdit->text().isEmpty()){
         return -1;
     }
-    if(!ui->imieTextEdit->isReadOnly()  && ui->imieTextEdit->toPlainText().isEmpty()){
+    if(!ui->imieTextEdit->isReadOnly()  && ui->imieTextEdit->text().isEmpty()){
         return -1;
     }
-    if(!ui->wodyTextEdit->isReadOnly()  && ui->wodyTextEdit->toPlainText().isEmpty()){
+    if(!ui->wodyTextEdit->isReadOnly()  && ui->wodyTextEdit->text().isEmpty()){
         return -1;
     }
-    if(!ui->przedmiotTextEdit->isReadOnly()  && ui->przedmiotTextEdit->toPlainText().isEmpty()){
+    if(!ui->przedmiotTextEdit->isReadOnly()  && ui->przedmiotTextEdit->text().isEmpty()){
         return -1;
     }
-    if(!ui->slawnaOsobaTextEdit->isReadOnly()  && ui->slawnaOsobaTextEdit->toPlainText().isEmpty()){
+    if(!ui->slawnaOsobaTextEdit->isReadOnly()  && ui->slawnaOsobaTextEdit->text().isEmpty()){
         return -1;
     }
     return 1;
@@ -233,29 +233,29 @@ QString gameMain::getAnswers(){
     QString answers = "";
 
     if(ui->panstwoTextEdit->isEnabled()){
-        answers += ui->panstwoTextEdit->toPlainText() + ",";
+        answers += "1" + ui->panstwoTextEdit->text() + ",";
     }
     if(ui->miastoTextEdit->isEnabled()){
-        answers += ui->miastoTextEdit->toPlainText() + ",";
+        answers += "2" + ui->miastoTextEdit->text() + ",";
     }
     if(ui->zwierzeTextEdit->isEnabled()){
-        answers += ui->zwierzeTextEdit->toPlainText() + ",";
+        answers += "3" + ui->zwierzeTextEdit->text() + ",";
     }
     if(ui->roslinaTextEdit->isEnabled()){
-        answers += ui->roslinaTextEdit->toPlainText() + ",";
+        answers += "4" + ui->roslinaTextEdit->text() + ",";
     }
     if(ui->imieTextEdit->isEnabled()){
-        answers += ui->imieTextEdit->toPlainText() + ",";
+        answers += "5" + ui->imieTextEdit->text() + ",";
     }
     if(ui->wodyTextEdit->isEnabled()){
-        answers += ui->wodyTextEdit->toPlainText() + ",";
+        answers += "6" + ui->wodyTextEdit->text() + ",";
     }
     if(ui->przedmiotTextEdit->isEnabled()){
-        answers += ui->przedmiotTextEdit->toPlainText() + ",";
+        answers += "7" + ui->przedmiotTextEdit->text() + ",";
     }
     if(ui->slawnaOsobaTextEdit->isEnabled()){
-        answers += ui->slawnaOsobaTextEdit->toPlainText() + ",";
+        answers += "8" + ui->slawnaOsobaTextEdit->text() + ",";
     }
-
+    answers = answers.toLower();
     return answers;
 }

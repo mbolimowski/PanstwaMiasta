@@ -8,12 +8,14 @@
 #include <QMessageBox>
 #include "gamemain.h"
 #include "login.h"
+#include "vote.h"
 
 
 class Application : public QMainWindow
 {
     Q_OBJECT
 private:
+    vote * voteWindow;
     gameMain * gamemain;
     Login * login;
     QTcpSocket * sock;

@@ -14,7 +14,7 @@ vote::~vote()
     delete ui;
 }
 
-
+/*
 void vote::addToCountryWidgetList(QString country){
     if(!checkPresenceOfElementInListWidget(country)){
         ui->panstwoListWidget->addItem(country);
@@ -70,7 +70,7 @@ void vote::addToFamousPersonWidgetList(QString famousPerson){
         addElementToList(famousPerson);
     }
 }
-
+*/
 bool vote::checkPresenceOfElementInListWidget(QString element){
     return itemsInWidgetList->contains(element);
 }
@@ -78,7 +78,7 @@ bool vote::checkPresenceOfElementInListWidget(QString element){
 void vote::addElementToList(QString element){
     itemsInWidgetList->append(element);
 }
-
+/*
 void vote::clearCountryWidgetList(){
     ui->panstwoListWidget->clear();
 }
@@ -111,7 +111,7 @@ void vote::clearThingWidgetList(){
 void vote::clearFamousPersonWidgetList(){
     ui->slawnaOsobaListWidget->clear();
 }
-
+*/
 void vote::clearElementsList(){
     itemsInWidgetList->clear();
 }
@@ -126,7 +126,12 @@ void vote::clearAllWidgetLists(){
 
 void vote::addToSpecialWidgetList(QString category){
     int whichWidget = category[0].digitValue();
-
+    QListWidget * currentWidget = getWidget(whichWidget);
+    QString tmpCategory = category.mid(1, category.length() - 1);
+    if(!checkPresenceOfElementInListWidget(tmpCategory)){
+        currentWidget->addItem(tmpCategory);
+        addElementToList(tmpCategory);
+    }
 }
 
 QPushButton * vote::getVoteButton(){

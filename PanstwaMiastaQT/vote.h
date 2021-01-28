@@ -56,6 +56,10 @@ public:
 
     void clearElementsList();
 
+    void clearAllWidgetLists();
+
+    void addToSpecialWidgetList(QString category);
+
     QPushButton * getVoteButton();
 
     QString getVoices();

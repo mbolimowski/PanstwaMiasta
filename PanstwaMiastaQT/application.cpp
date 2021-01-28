@@ -88,6 +88,8 @@ void Application::sendAnswersButtonHit(){
 
 void Application::voteButtonHit(){
     sendMessage("g" + voteWindow->getVoices() + "\n");
+    voteWindow->hide();
+    gamemain->show();
 }
 
 
@@ -261,7 +263,7 @@ void Application::closeAll()
 }
 
 void Application::updateTime(){
-    if(roundSeconds == 0){
+    if(roundSeconds == 18){
         QString message = "o" + gamemain->getAnswers() + "\n";
         sendMessage(message);
         roundTimer->stop();

@@ -17,9 +17,6 @@ vote::~vote()
 
 void vote::addToCountryWidgetList(QString country){
     if(!checkPresenceOfElementInListWidget(country)){
-        //QListWidgetItem * item = new QListWidgetItem();
-        //item->setText(country);
-        //item->setCheckState(Qt::Unchecked);
         ui->panstwoListWidget->addItem(country);
         addElementToList(country);
     }
@@ -27,9 +24,6 @@ void vote::addToCountryWidgetList(QString country){
 
 void vote::addToCityWidgetList(QString city){
     if(!checkPresenceOfElementInListWidget(city)){
-        //QListWidgetItem * item = new QListWidgetItem();
-        //item->setText(city);
-        //item->setCheckState(Qt::Unchecked);
         ui->miastoListWidget->addItem(city);
         addElementToList(city);
     }
@@ -37,9 +31,6 @@ void vote::addToCityWidgetList(QString city){
 
 void vote::addToAnimalWidgetList(QString animal){
     if(!checkPresenceOfElementInListWidget(animal)){
-        //QListWidgetItem * item = new QListWidgetItem();
-        //item->setText(animal);
-        //item->setCheckState(Qt::Unchecked);
         ui->zwierzeListWidget->addItem(animal);
         addElementToList(animal);
     }
@@ -47,9 +38,6 @@ void vote::addToAnimalWidgetList(QString animal){
 
 void vote::addToPlantWidgetList(QString plant){
     if(!checkPresenceOfElementInListWidget(plant)){
-        //QListWidgetItem * item = new QListWidgetItem();
-        //item->setText(plant);
-        //item->setCheckState(Qt::Unchecked);
         ui->roslinaListWidget->addItem(plant);
         addElementToList(plant);
     }
@@ -57,9 +45,6 @@ void vote::addToPlantWidgetList(QString plant){
 
 void vote::addToNameWidgetList(QString name){
     if(!checkPresenceOfElementInListWidget(name)){
-        //QListWidgetItem * item = new QListWidgetItem();
-        //item->setText(name);
-        //item->setCheckState(Qt::Unchecked);
         ui->imieListWidget->addItem(name);
         addElementToList(name);
     }
@@ -67,9 +52,6 @@ void vote::addToNameWidgetList(QString name){
 
 void vote::addToWaterWidgetList(QString water){
     if(!checkPresenceOfElementInListWidget(water)){
-        //QListWidgetItem * item = new QListWidgetItem();
-        //item->setText(water);
-        //item->setCheckState(Qt::Unchecked);
         ui->wodyListWidget->addItem(water);
         addElementToList(water);
     }
@@ -77,9 +59,6 @@ void vote::addToWaterWidgetList(QString water){
 
 void vote::addToThingWidgetList(QString thing){
     if(!checkPresenceOfElementInListWidget(thing)){
-        //QListWidgetItem * item = new QListWidgetItem();
-        //item->setText(thing);
-        //item->setCheckState(Qt::Unchecked);
         ui->przedmiotListWidget->addItem(thing);
         addElementToList(thing);
     }
@@ -87,9 +66,6 @@ void vote::addToThingWidgetList(QString thing){
 
 void vote::addToFamousPersonWidgetList(QString famousPerson){
     if(!checkPresenceOfElementInListWidget(famousPerson)){
-        //QListWidgetItem * item = new QListWidgetItem();
-        //item->setText(famousPerson);
-        //item->setCheckState(Qt::Unchecked);
         ui->slawnaOsobaListWidget->addItem(famousPerson);
         addElementToList(famousPerson);
     }
@@ -140,17 +116,29 @@ void vote::clearElementsList(){
     itemsInWidgetList->clear();
 }
 
+void vote::clearAllWidgetLists(){
+
+    for(int i = 1; i < 9; i++){
+        QListWidget * currentWidget = getWidget(i);
+        currentWidget->clear();
+    }
+}
+
+void vote::addToSpecialWidgetList(QString category){
+    int whichWidget = category[0].digitValue();
+
+}
+
 QPushButton * vote::getVoteButton(){
     return ui->glosujButton;
 }
 
 QString vote::getVoices(){
     QString voices = "";
-    for(int i = 0; i < 8; i++){
-        QListWidget * currentWidget = new QListWidget();
-        currentWidget = getWidget(i);
-        for(int j = 0; j < currentWidget->selectedItems().count(); j++){
-            voices += currentWidget->selectedItems().at(j)->text() + ",";
+    for(int i = 1; i < 9; i++){
+        QListWidget * currentWidget = getWidget(i);
+        for(int j = 0; j < (int)currentWidget->selectedItems().size(); j++){
+            voices += currentWidget->selectedItems().value(j)->text() + ",";
         }
     }
     return voices;

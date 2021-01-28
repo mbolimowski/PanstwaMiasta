@@ -310,6 +310,7 @@ char randomNumber()
 
 void gameInfo(char * message)
 {
+    std::cout<<message<<std::endl;
     bool ifRounds = true;
     for(int i=1;i<(int)strlen(message);i++)
     {
@@ -319,13 +320,12 @@ void gameInfo(char * message)
             memset(charRounds,0,255);
             strncpy(charRounds, message+1, i-1);
             rounds = atoi(charRounds) + 1; 
-            std::cout << rounds<<std::endl;
             ifRounds = false;
+            continue;
         }
         if(message[i] == ',' && !ifRounds)
         {
-            categories.push_back(message[i-1]%48+1);
-            std::cout << message[i-1] % 48 <<std::endl;
+            categories.push_back(message[i-1]%48);
         }
     }
 }
@@ -338,7 +338,7 @@ void startRound()
     char message[255];
     memset(message, 0, 255);
     strcpy(message, "s\0");
-    std::string tmp = std::to_string(rounds);
+    std::string tmp = std::to_string(--rounds);
     char const * charRounds = tmp.c_str();
     strncat(message, charRounds, strlen(charRounds));
     char tmp2[3] = {',' , randomNumber(), ','};

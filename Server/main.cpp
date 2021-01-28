@@ -20,15 +20,18 @@
 #include <string.h>
 #include <chrono>
 #include <thread>
+#include <map>
+
 
 class Client;
 int servFd;
 int epollFd;
-bool gameStarted;
+bool answerMode = false;
 std::unordered_set<Client*> clients;
-
+int numberOfResponses = 0;
 int rounds = 0;
 std::vector<int> categories;
+std::map<char*, int> answersVotes;
 
 
 void ctrl_c(int);
@@ -41,6 +44,11 @@ void sendPlayersInfo();
 char randomNumber();
 void gameInfo(char * message);
 void startRound();
+void readAnswers(Client * client, char * answers, int msglen);
+void cleanAnswers(Client * client);
+void allAnswers(Client * omittedClient, char * buffer);
+void sendAllAnswers();
+void readVotes(char * message, int msglen);
 
 
 struct Handler {
@@ -51,6 +59,7 @@ class Client : public Handler {
     int _fd;
     char name[255];
     int points;
+    std::vector<char *> * answers;
     struct Buffer {
         Buffer() {data = (char*) malloc(len);}
         Buffer(const char* srcData, ssize_t srcLen) : len(srcLen) {data = (char*) malloc(len); memcpy(data, srcData, len);}
@@ -75,6 +84,7 @@ public:
         epoll_ctl(epollFd, EPOLL_CTL_ADD, _fd, &ee);
         memset(name,0,255);
         points = 0;
+        answers = new std::vector<char*>();
     }
     virtual ~Client(){
         epoll_ctl(epollFd, EPOLL_CTL_DEL, _fd, nullptr);
@@ -84,6 +94,7 @@ public:
     int fd() const {return _fd;}
     char * getName() {return name;}
     int getPoints() {return points;}
+    std::vector<char*> * getAnswers(){return answers;}
     virtual void handleEvent(uint32_t events) override {
         if(events & EPOLLIN) {
             ssize_t count = read(_fd, readBuffer.dataPos(), readBuffer.remaining());
@@ -107,7 +118,11 @@ public:
                         }
                         if(readBuffer.data[0] == 's')
                         {
-                            gameStarted = true;
+                            numberOfResponses = 0;
+                            cleanAnswers(this);
+                            categories.clear();
+                            categories.shrink_to_fit();
+                            answerMode = true;
                             gameInfo(readBuffer.data);
                             startRound();
                         }
@@ -115,7 +130,21 @@ public:
                         {
                             sendToAll(readBuffer.data, thismsglen);
                         }
-                        
+                        if(readBuffer.data[0] == 'o')
+                        {
+                            readAnswers(this, readBuffer.data, thismsglen);
+                            numberOfResponses ++;
+                            if(numberOfResponses == (int)clients.size())
+                            {
+                                sendAllAnswers();
+                                numberOfResponses = 0;
+                            }
+                        }
+                        if(readBuffer.data[0] == 'g')
+                        {
+
+
+                        }
                         auto nextmsgslen =  readBuffer.pos - thismsglen;
                         memmove(readBuffer.data, eol+1, nextmsgslen);
                         readBuffer.pos = nextmsgslen;
@@ -182,7 +211,6 @@ class : Handler {
             printf("New connection from: %s:%hu (fd: %d)\n", inet_ntoa(clientAddr.sin_addr), ntohs(clientAddr.sin_port), clientFd);
             Client * newClient = new Client(clientFd); 
             clients.insert(newClient);
-            if(!gameStarted)
             startOptions(newClient);
         }
         if(events & ~EPOLLIN){
@@ -193,7 +221,6 @@ class : Handler {
 } servHandler;
 
 int main(int argc, char ** argv){
-    gameStarted = false;
     if(argc != 2) error(1, 0, "Need 1 argument - port");
     auto port = readPort(argv[1]);
     servFd = socket(AF_INET, SOCK_STREAM, 0);
@@ -364,3 +391,79 @@ void startRound()
 
 
 
+void readAnswers(Client * client, char * answers, int msglen)
+{
+    int pos = 1;
+    for(int i=1;i<msglen;i++)
+    {
+        if(answers[i] == ',')
+        {
+            char answer[31];
+            memset(answer,0,100);
+            strncpy(answer, answers+pos, i-pos);
+            std::cout << answer << std::endl;
+            client->getAnswers()->push_back(answer);
+            pos = i+1;
+        }
+    }
+}
+
+void cleanAnswers(Client * client)
+{
+    for(auto it = client->getAnswers()->begin(); it != client->getAnswers()->end(); it++)
+    {
+        memset(*it, 0, 31);
+    }
+    client->getAnswers()->clear();
+    client->getAnswers()->shrink_to_fit();
+}
+
+//zwraca polaczone odpowiedzi wszystkich clientow z wyjatkiem omittedclient
+void allAnswers(Client * omittedClient, char * buffer)
+{
+    strcpy(buffer, "o\0");
+    for(Client * client : clients)
+    {
+        if(client->fd() != omittedClient->fd())
+        for(auto it = client->getAnswers()->begin(); it != client->getAnswers()->end(); it++)
+        {
+            strncat(buffer, (*it) , strlen(*it));
+            strcat(buffer,",\0");
+        }
+        strcat(buffer,";");
+    }
+    strcat(buffer,"\n");
+    std::cout <<"AllAnswers: " <<  buffer<< std::endl;
+}
+
+//wysyla wszystkim odpowiednie 
+void sendAllAnswers()
+{
+    for(Client * client : clients)
+    {
+        char message[512];
+        memset(message, 0, 512); 
+        allAnswers(client, message);
+        client->write(message, strlen(message));
+        std::cout << "Wyslano do " << client->fd() << " " << message << std::endl;
+    }
+}
+
+
+void readVotes(char * message, int msglen)
+{
+    int pos = 1;
+    for(int i=1;i<msglen;i++)
+    {
+        if(message[i] == ',')
+        {
+            char tmp[31];
+            memset(tmp,0,31);
+            strncpy(tmp, message+pos, i-pos);
+            if(answersVotes.find(tmp) == answersVotes.end())
+            {
+                
+            }
+        }
+    }
+}

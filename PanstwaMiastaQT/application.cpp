@@ -88,6 +88,8 @@ void Application::sendAnswersButtonHit(){
 
 void Application::voteButtonHit(){
     sendMessage("g" + voteWindow->getVoices() + "\n");
+    voteWindow->clearAllWidgetLists();
+    voteWindow->clearElementsList();
 }
 
 

@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include <QMessageBox>
-
+#include <QDebug>
 namespace Ui {
 class gameMain;
 }

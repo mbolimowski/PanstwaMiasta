@@ -59,6 +59,7 @@ void Application::connectButtonHit()
 }
 
 void Application::startButtonHit(){
+    gamemain->setStartButtonDisabled();
     QString message;
     if(gamemain->isRoundsCorrect() == 1 && gamemain->isCheckedAtLeastOneBox() == 1){
         message = gamemain->getRounds() + ",";
@@ -215,6 +216,13 @@ void Application::closeAll()
 }
 
 void Application::updateTime(){
-    roundSeconds--;
-    gamemain->setTime(roundSeconds);
+    if(roundSeconds == 0){
+        QString message = "o" + gamemain->getAnswers() + "\n";
+        roundTimer->stop();
+    }
+    else{
+        roundSeconds--;
+        gamemain->setTime(roundSeconds);
+    }
+
 }

@@ -31,7 +31,7 @@ std::unordered_set<Client*> clients;
 int numberOfResponses = 0;
 int rounds = 0;
 std::vector<int> categories;
-std::map<char*, int> answersVotes;
+std::map<std::string, int> answersVotes;
 
 
 void ctrl_c(int);
@@ -143,8 +143,15 @@ public:
                             }
                         }
                         if(readBuffer.data[0] == 'g')
-                        {
-                            
+                        {   
+
+                            readVotes(readBuffer.data, thismsglen);
+                            numberOfResponses++;
+                            if(numberOfResponses == (int)clients.size())
+                            {
+                                
+                                numberOfResponses = 0;
+                            }
 
                         }
                         auto nextmsgslen =  readBuffer.pos - thismsglen;
@@ -459,10 +466,43 @@ void readVotes(char * message, int msglen)
             char tmp[31];
             memset(tmp,0,31);
             strncpy(tmp, message+pos, i-pos);
-            if(answersVotes.find(tmp) == answersVotes.end())
+            std::cout << "vote1: " << tmp<<std::endl;
+            std::string strVote(tmp);
+            if(answersVotes.find(strVote) == answersVotes.end())
             {
+                answersVotes.insert(std::pair<std::string, int>(strVote,0));
+            }
+            else{
+                answersVotes[strVote]++; 
+            }
+            pos = i+1;
+        }
+    }
+}
+
+
+
+void calcClientsPoints()
+{
+    for(Client * client : clients)
+    {
+        for(int i=0;i<(int)client->getAnswers()->size();i++)
+        {
+            std::string answer = (*client->getAnswers())[i];
+            if(answersVotes.find(answer) != answersVotes.end())
+            {
+                /*
+                int halfClients = 0;
+                if((int)clients.size() )
+                if(answersVotes[answer] )
+                */
+            }
+            else{
                 
             }
         }
+
+
+
     }
 }

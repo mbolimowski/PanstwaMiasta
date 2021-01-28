@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QListWidgetItem>
 #include <QList>
+#include <QDebug>
 
 namespace Ui {
 class vote;
@@ -54,6 +55,10 @@ public:
     void clearFamousPersonWidgetList();
 
     void clearElementsList();
+
+    void clearAllWidgetLists();
+
+    void addToSpecialWidgetList(QString category);
 
     QPushButton * getVoteButton();
 

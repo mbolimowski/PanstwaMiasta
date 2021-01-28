@@ -214,7 +214,7 @@ void Application::readyRead()
             action = action.mid(1, action.length() - 1);
             for(int i = 0; i < action.length(); i++){
                 if(action[i] == ','){
-                    tmp = action.mid(whereComma + 1, i - whereComma + 1);
+                    tmp = action.mid(whereComma + 1, i - whereComma - 1);
                     if(tmp[0] == "1"){
                         voteWindow->addToCountryWidgetList(tmp);
                     }

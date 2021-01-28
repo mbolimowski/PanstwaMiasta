@@ -55,6 +55,13 @@ public:
 
     void clearElementsList();
 
+    QPushButton * getVoteButton();
+
+    QString getVoices();
+
+    QListWidget * getWidget(int whichWidget);
+
+
 private:
 
     QList<QString> * itemsInWidgetList;

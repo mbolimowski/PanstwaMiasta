@@ -31,6 +31,8 @@ public:
 
     void sendAnswersButtonHit();
 
+    void voteButtonHit();
+
     void connected();
     void disconnected();
     void readyRead();

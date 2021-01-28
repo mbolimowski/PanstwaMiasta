@@ -50,7 +50,7 @@
     <string>GŁOSUJ</string>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -73,7 +73,11 @@
        </widget>
       </item>
       <item>
-       <widget class="QListWidget" name="panstwoListWidget"/>
+       <widget class="QListWidget" name="panstwoListWidget">
+        <property name="selectionMode">
+         <enum>QAbstractItemView::MultiSelection</enum>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
@@ -90,7 +94,11 @@
        </widget>
       </item>
       <item>
-       <widget class="QListWidget" name="miastoListWidget"/>
+       <widget class="QListWidget" name="miastoListWidget">
+        <property name="selectionMode">
+         <enum>QAbstractItemView::MultiSelection</enum>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
@@ -107,7 +115,11 @@
        </widget>
       </item>
       <item>
-       <widget class="QListWidget" name="zwierzeListWidget"/>
+       <widget class="QListWidget" name="zwierzeListWidget">
+        <property name="selectionMode">
+         <enum>QAbstractItemView::MultiSelection</enum>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
@@ -124,7 +136,11 @@
        </widget>
       </item>
       <item>
-       <widget class="QListWidget" name="roslinaListWidget"/>
+       <widget class="QListWidget" name="roslinaListWidget">
+        <property name="selectionMode">
+         <enum>QAbstractItemView::MultiSelection</enum>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
@@ -141,7 +157,11 @@
        </widget>
       </item>
       <item>
-       <widget class="QListWidget" name="imieListWidget"/>
+       <widget class="QListWidget" name="imieListWidget">
+        <property name="selectionMode">
+         <enum>QAbstractItemView::MultiSelection</enum>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
@@ -158,7 +178,11 @@
        </widget>
       </item>
       <item>
-       <widget class="QListWidget" name="wodyListWidget"/>
+       <widget class="QListWidget" name="wodyListWidget">
+        <property name="selectionMode">
+         <enum>QAbstractItemView::MultiSelection</enum>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
@@ -175,7 +199,11 @@
        </widget>
       </item>
       <item>
-       <widget class="QListWidget" name="przedmiotListWidget"/>
+       <widget class="QListWidget" name="przedmiotListWidget">
+        <property name="selectionMode">
+         <enum>QAbstractItemView::MultiSelection</enum>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
@@ -192,7 +220,11 @@
        </widget>
       </item>
       <item>
-       <widget class="QListWidget" name="slawnaOsobaListWidget"/>
+       <widget class="QListWidget" name="slawnaOsobaListWidget">
+        <property name="selectionMode">
+         <enum>QAbstractItemView::MultiSelection</enum>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>

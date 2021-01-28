@@ -21,6 +21,7 @@ Application::Application(QWidget * parent) : QMainWindow(parent)
     connect(gamemain->getStartButton(), &QPushButton::clicked, this, &Application::startButtonHit);
     connect(gamemain->getSendAnswerButton(), &QPushButton::clicked, this, &Application::sendAnswersButtonHit);
     connect(roundTimer, &QTimer::timeout, this, &Application::updateTime);
+    connect(voteWindow->getVoteButton(), &QPushButton::clicked, this, &Application::voteButtonHit);
 }
 
 Application::~Application()
@@ -83,6 +84,10 @@ void Application::sendAnswersButtonHit(){
         messageBox.critical(gamemain, "Błąd", "Należy wypełnic wszystkie wymagane pola aby zglosić odpowiedzi!");
     }
 
+}
+
+void Application::voteButtonHit(){
+    sendMessage("g" + voteWindow->getVoices() + "\n");
 }
 
 

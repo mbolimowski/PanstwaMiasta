@@ -18,6 +18,8 @@
 #include <stdlib.h>
 #include <vector>
 #include <string.h>
+#include <chrono>
+#include <thread>
 
 class Client;
 int servFd;
@@ -27,6 +29,7 @@ std::unordered_set<Client*> clients;
 
 int rounds = 0;
 std::vector<int> categories;
+
 
 void ctrl_c(int);
 void sendToAllBut(int fd, char * buffer, int count);
@@ -108,7 +111,11 @@ public:
                             gameInfo(readBuffer.data);
                             startRound();
                         }
-                        //sendToAllBut(_fd, readBuffer.data, thismsglen);
+                        if(readBuffer.data[0] == 'z')
+                        {
+                            sendToAll(readBuffer.data, thismsglen);
+                        }
+                        
                         auto nextmsgslen =  readBuffer.pos - thismsglen;
                         memmove(readBuffer.data, eol+1, nextmsgslen);
                         readBuffer.pos = nextmsgslen;
@@ -354,3 +361,6 @@ void startRound()
     std::cout << message << std::endl;
     sendToAll(message, strlen(message));
 }
+
+
+

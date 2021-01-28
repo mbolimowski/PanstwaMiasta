@@ -7,6 +7,7 @@
 			"command": "/usr/bin/g++",
 			"args": [
 				"-g",
+				"-pthread",
 				"main.cpp",
 				"-o",
 				"server"

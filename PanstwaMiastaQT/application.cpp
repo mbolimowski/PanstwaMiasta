@@ -105,6 +105,7 @@ void Application::readyRead()
     for(auto it = actions.begin();it != actions.end();++it)
     {
         QString action = (*it);
+        qDebug() << action;
         if(action[0] == '1')
         {
             gamemain->setCategoriesDisabled();
@@ -121,7 +122,6 @@ void Application::readyRead()
             QMessageBox mb;
             mb.information(gamemain, "Informacja", "Poczekaj, aż właściciel poczekalni rozpocznie grę!");
         }
-        qDebug() << action;
         if(action[0] == 'i')
         {
             gamemain->clearPlayerAndPointsListWidget();
@@ -153,30 +153,29 @@ void Application::readyRead()
 
             do{
                 counter++;
-            }while(action[counter] == ',');
+            }while(action[counter] != ',');
 
             rounds = action.mid(0, counter);
             action = action.mid(counter + 1, action.length() - counter -1);
-
             letter = action.mid(0, 1);
             action = action.mid(2, action.length() - 2);
-
             gamemain->setLetter(letter);
             gamemain->setRounds(rounds);
 
-            QString tmp;
+            QChar tmp;
 
             for(int i = 0; i < action.length(); i++){
                 if(action[i] == ','){
                     tmp = action[i-1];
-                    if(tmp == "1") gamemain->setCountryTextEditEnabled();
-                    else if(tmp == "2") gamemain->setCityTextEditEnabled();
-                    else if(tmp == "3") gamemain->setAnimalTextEditEnabled();
-                    else if(tmp == "4") gamemain->setPlantTextEditEnabled();
-                    else if(tmp == "5") gamemain->setNameTextEditEnabled();
-                    else if(tmp == "6") gamemain->setWaterTextEditEnabled();
-                    else if(tmp == "7") gamemain->setThingTextEditEnabled();
-                    else if(tmp == "8") gamemain->setFamousPersonTextEditEnabled();
+                    qDebug() << tmp;
+                    if(tmp == '1') gamemain->setCountryTextEditEnabled();
+                    else if(tmp == '2') gamemain->setCityTextEditEnabled();
+                    else if(tmp == '3') gamemain->setAnimalTextEditEnabled();
+                    else if(tmp == '4') gamemain->setPlantTextEditEnabled();
+                    else if(tmp == '5') gamemain->setNameTextEditEnabled();
+                    else if(tmp == '6') gamemain->setWaterTextEditEnabled();
+                    else if(tmp == '7') gamemain->setThingTextEditEnabled();
+                    else if(tmp == '8') gamemain->setFamousPersonTextEditEnabled();
                 }
             }
         }

@@ -315,16 +315,17 @@ void gameInfo(char * message)
     {
         if(message[i] == ',' && ifRounds)
         {
-            char * charRounds;
+            char charRounds[255];
+            memset(charRounds,0,255);
             strncpy(charRounds, message+1, i-1);
-            rounds = atoi(charRounds); 
+            rounds = atoi(charRounds) + 1; 
             std::cout << rounds<<std::endl;
             ifRounds = false;
         }
         if(message[i] == ',' && !ifRounds)
         {
             categories.push_back(message[i-1]%48+1);
-            std::cout << message[i-1] % 48+ 1;
+            std::cout << message[i-1] % 48 <<std::endl;
         }
     }
 }
@@ -349,6 +350,7 @@ void startRound()
         strncat(message,tmp3,3);
         memset(tmp3,0,2);
     }
+    strcat(message,"\n");
     std::cout << message << std::endl;
     sendToAll(message, strlen(message));
 }

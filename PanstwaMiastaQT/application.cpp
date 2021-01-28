@@ -118,6 +118,8 @@ void Application::readyRead()
     std::vector<QString> actions;
     int counter = 0;
     qDebug() << message;
+
+
     for(int i=0;i<(int)message.length();i++)
     {
         if(message[i] == '\n')
@@ -127,6 +129,8 @@ void Application::readyRead()
                     actions.push_back(action);
                 }
     }
+
+
     for(auto it = actions.begin();it != actions.end();++it)
     {
         QString action = (*it);
@@ -138,6 +142,8 @@ void Application::readyRead()
             mb.information(gamemain, "Informacja", "Zostałeś właścicielem! Oznacza to, że możesz wybrać kategorie dostępne w następnej grze oraz ilość rund. Kliknij przycisk start gdy będziesz gotowy!");
 
         }
+
+
         if(action[0] == '2')
         {
             gamemain->setCheckboxesDisabled();
@@ -147,6 +153,8 @@ void Application::readyRead()
             QMessageBox mb;
             mb.information(gamemain, "Informacja", "Poczekaj, aż właściciel poczekalni rozpocznie grę!");
         }
+
+
         if(action[0] == 'i')
         {
             gamemain->clearPlayerAndPointsListWidget();
@@ -170,6 +178,8 @@ void Application::readyRead()
                 }
             }
         }
+
+
         if(action[0] == 's'){
             voteWindow->hide();
             gamemain->show();
@@ -209,6 +219,8 @@ void Application::readyRead()
             }
             roundTimer->start(1000);
         }
+
+
         if(action[0] == "z"){
             gamemain->setSendAnswerButtonDisable();
             roundSeconds = 21;
@@ -216,6 +228,8 @@ void Application::readyRead()
             QMessageBox mb;
             mb.information(gamemain, "Informacja", "Pozostało 20 sekund, pierwszy z graczy zgłosił swoje odpowiedzi!");
         }
+
+
         if(action[0] == "o"){
             int whereComma = -1;
             QString tmp;
@@ -224,35 +238,27 @@ void Application::readyRead()
                 if(action[i] == ','){
                     tmp = action.mid(whereComma + 1, i - whereComma - 1);
                     if(tmp[0] == "1"){
-                        //voteWindow->addToCountryWidgetList(tmp);
                         voteWindow->addToSpecialWidgetList(tmp);
                     }
                     else if(tmp[0] == "2"){
-                        //voteWindow->addToCityWidgetList(tmp);
                         voteWindow->addToSpecialWidgetList(tmp);
                     }
                     else if(tmp[0] == "3"){
-                        //voteWindow->addToAnimalWidgetList(tmp);
                         voteWindow->addToSpecialWidgetList(tmp);
                     }
                     else if(tmp[0] == "4"){
-                        //voteWindow->addToPlantWidgetList(tmp);
                         voteWindow->addToSpecialWidgetList(tmp);
                     }
                     else if(tmp[0] == "5"){
-                        //voteWindow->addToNameWidgetList(tmp);
                         voteWindow->addToSpecialWidgetList(tmp);
                     }
                     else if(tmp[0] == "6"){
-                        //voteWindow->addToWaterWidgetList(tmp);
                         voteWindow->addToSpecialWidgetList(tmp);
                     }
                     else if(tmp[0] == "7"){
-                        //voteWindow->addToThingWidgetList(tmp);
                         voteWindow->addToSpecialWidgetList(tmp);
                     }
                     else{
-                        //voteWindow->addToFamousPersonWidgetList(tmp);
                         voteWindow->addToSpecialWidgetList(tmp);
                     }
                     whereComma = i;

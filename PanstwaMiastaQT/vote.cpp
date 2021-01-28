@@ -14,63 +14,6 @@ vote::~vote()
     delete ui;
 }
 
-/*
-void vote::addToCountryWidgetList(QString country){
-    if(!checkPresenceOfElementInListWidget(country)){
-        ui->panstwoListWidget->addItem(country);
-        addElementToList(country);
-    }
-}
-
-void vote::addToCityWidgetList(QString city){
-    if(!checkPresenceOfElementInListWidget(city)){
-        ui->miastoListWidget->addItem(city);
-        addElementToList(city);
-    }
-}
-
-void vote::addToAnimalWidgetList(QString animal){
-    if(!checkPresenceOfElementInListWidget(animal)){
-        ui->zwierzeListWidget->addItem(animal);
-        addElementToList(animal);
-    }
-}
-
-void vote::addToPlantWidgetList(QString plant){
-    if(!checkPresenceOfElementInListWidget(plant)){
-        ui->roslinaListWidget->addItem(plant);
-        addElementToList(plant);
-    }
-}
-
-void vote::addToNameWidgetList(QString name){
-    if(!checkPresenceOfElementInListWidget(name)){
-        ui->imieListWidget->addItem(name);
-        addElementToList(name);
-    }
-}
-
-void vote::addToWaterWidgetList(QString water){
-    if(!checkPresenceOfElementInListWidget(water)){
-        ui->wodyListWidget->addItem(water);
-        addElementToList(water);
-    }
-}
-
-void vote::addToThingWidgetList(QString thing){
-    if(!checkPresenceOfElementInListWidget(thing)){
-        ui->przedmiotListWidget->addItem(thing);
-        addElementToList(thing);
-    }
-}
-
-void vote::addToFamousPersonWidgetList(QString famousPerson){
-    if(!checkPresenceOfElementInListWidget(famousPerson)){
-        ui->slawnaOsobaListWidget->addItem(famousPerson);
-        addElementToList(famousPerson);
-    }
-}
-*/
 bool vote::checkPresenceOfElementInListWidget(QString element){
     return itemsInWidgetList->contains(element);
 }
@@ -78,40 +21,7 @@ bool vote::checkPresenceOfElementInListWidget(QString element){
 void vote::addElementToList(QString element){
     itemsInWidgetList->append(element);
 }
-/*
-void vote::clearCountryWidgetList(){
-    ui->panstwoListWidget->clear();
-}
 
-void vote::clearCityWidgetList(){
-    ui->miastoListWidget->clear();
-}
-
-void vote::clearAnimalWidgetList(){
-    ui->zwierzeListWidget->clear();
-
-}
-
-void vote::clearPlantWidgetList(){
-    ui->roslinaListWidget->clear();
-}
-
-void vote::clearNameWidgetList(){
-    ui->imieListWidget->clear();
-}
-
-void vote::clearWaterWidgetList(){
-    ui->wodyListWidget->clear();
-}
-
-void vote::clearThingWidgetList(){
-    ui->przedmiotListWidget->clear();
-}
-
-void vote::clearFamousPersonWidgetList(){
-    ui->slawnaOsobaListWidget->clear();
-}
-*/
 void vote::clearElementsList(){
     itemsInWidgetList->clear();
 }
@@ -127,8 +37,7 @@ void vote::clearAllWidgetLists(){
 void vote::addToSpecialWidgetList(QString category){
     int whichWidget = category[0].digitValue();
     QListWidget * currentWidget = getWidget(whichWidget);
-    QString tmpCategory = category.mid(1, category.length() - 1);
-    if(!checkPresenceOfElementInListWidget(tmpCategory)){
+    if(!checkPresenceOfElementInListWidget(category)){
         currentWidget->addItem(category);
         addElementToList(category);
     }

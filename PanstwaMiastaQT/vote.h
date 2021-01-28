@@ -18,41 +18,9 @@ public:
     explicit vote(QWidget *parent = nullptr);
     ~vote();
 
-    void addToCountryWidgetList(QString country);
-
-    void addToCityWidgetList(QString city);
-
-    void addToAnimalWidgetList(QString animal);
-
-    void addToPlantWidgetList(QString plant);
-
-    void addToNameWidgetList(QString name);
-
-    void addToWaterWidgetList(QString water);
-
-    void addToThingWidgetList(QString thing);
-
-    void addToFamousPersonWidgetList(QString famousPerson);
-
     bool checkPresenceOfElementInListWidget(QString element);
 
     void addElementToList(QString element);
-
-    void clearCountryWidgetList();
-
-    void clearCityWidgetList();
-
-    void clearAnimalWidgetList();
-
-    void clearPlantWidgetList();
-
-    void clearNameWidgetList();
-
-    void clearWaterWidgetList();
-
-    void clearThingWidgetList();
-
-    void clearFamousPersonWidgetList();
 
     void clearElementsList();
 

@@ -174,9 +174,9 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>120</y>
+     <y>110</y>
      <width>271</width>
-     <height>501</height>
+     <height>601</height>
     </rect>
    </property>
    <layout class="QFormLayout" name="formLayout">

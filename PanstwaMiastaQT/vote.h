@@ -59,8 +59,6 @@ private:
 
     QList<QString> * itemsInWidgetList;
 
-    QListWidgetItem * items;
-
     Ui::vote *ui;
 };
 

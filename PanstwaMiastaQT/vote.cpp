@@ -6,7 +6,6 @@ vote::vote(QWidget *parent) :
     ui(new Ui::vote)
 {
     ui->setupUi(this);
-    items = new QListWidgetItem();
     itemsInWidgetList = new QList<QString>;
 }
 
@@ -18,72 +17,80 @@ vote::~vote()
 
 void vote::addToCountryWidgetList(QString country){
     if(!checkPresenceOfElementInListWidget(country)){
-        items->setText(country);
-        items->setCheckState(Qt::Unchecked);
-        ui->panstwoListWidget->addItem(country);
+        QListWidgetItem * item = new QListWidgetItem();
+        item->setText(country);
+        item->setCheckState(Qt::Unchecked);
+        ui->panstwoListWidget->addItem(item);
         addElementToList(country);
     }
 }
 
 void vote::addToCityWidgetList(QString city){
     if(!checkPresenceOfElementInListWidget(city)){
-        items->setText(city);
-        items->setCheckState(Qt::Unchecked);
-        ui->miastoListWidget->addItem(city);
+        QListWidgetItem * item = new QListWidgetItem();
+        item->setText(city);
+        item->setCheckState(Qt::Unchecked);
+        ui->miastoListWidget->addItem(item);
         addElementToList(city);
     }
 }
 
 void vote::addToAnimalWidgetList(QString animal){
     if(!checkPresenceOfElementInListWidget(animal)){
-        items->setText(animal);
-        items->setCheckState(Qt::Unchecked);
-        ui->zwierzeListWidget->addItem(animal);
+        QListWidgetItem * item = new QListWidgetItem();
+        item->setText(animal);
+        item->setCheckState(Qt::Unchecked);
+        ui->zwierzeListWidget->addItem(item);
         addElementToList(animal);
     }
 }
 
 void vote::addToPlantWidgetList(QString plant){
     if(!checkPresenceOfElementInListWidget(plant)){
-        items->setText(plant);
-        items->setCheckState(Qt::Unchecked);
-        ui->roslinaListWidget->addItem(plant);
+        QListWidgetItem * item = new QListWidgetItem();
+        item->setText(plant);
+        item->setCheckState(Qt::Unchecked);
+        ui->roslinaListWidget->addItem(item);
         addElementToList(plant);
     }
 }
 
 void vote::addToNameWidgetList(QString name){
     if(!checkPresenceOfElementInListWidget(name)){
-        items->setText(name);
-        items->setCheckState(Qt::Unchecked);
-        ui->imieListWidget->addItem(name);
+        QListWidgetItem * item = new QListWidgetItem();
+        item->setText(name);
+        item->setCheckState(Qt::Unchecked);
+        ui->imieListWidget->addItem(item);
         addElementToList(name);
     }
 }
 
 void vote::addToWaterWidgetList(QString water){
     if(!checkPresenceOfElementInListWidget(water)){
-        items->setText(water);
-        items->setCheckState(Qt::Unchecked);
-        ui->wodyListWidget->addItem(water);
+        QListWidgetItem * item = new QListWidgetItem();
+        item->setText(water);
+        item->setCheckState(Qt::Unchecked);
+        ui->wodyListWidget->addItem(item);
         addElementToList(water);
     }
 }
 
 void vote::addToThingWidgetList(QString thing){
     if(!checkPresenceOfElementInListWidget(thing)){
-        items->setText(thing);
-        items->setCheckState(Qt::Unchecked);
-        ui->przedmiotListWidget->addItem(thing);
+        QListWidgetItem * item = new QListWidgetItem();
+        item->setText(thing);
+        item->setCheckState(Qt::Unchecked);
+        ui->przedmiotListWidget->addItem(item);
         addElementToList(thing);
     }
 }
 
 void vote::addToFamousPersonWidgetList(QString famousPerson){
     if(!checkPresenceOfElementInListWidget(famousPerson)){
-        items->setText(famousPerson);
-        items->setCheckState(Qt::Unchecked);
-        ui->slawnaOsobaListWidget->addItem(famousPerson);
+        QListWidgetItem * item = new QListWidgetItem();
+        item->setText(famousPerson);
+        item->setCheckState(Qt::Unchecked);
+        ui->slawnaOsobaListWidget->addItem(item);
         addElementToList(famousPerson);
     }
 }

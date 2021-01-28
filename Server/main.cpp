@@ -144,7 +144,7 @@ public:
                         }
                         if(readBuffer.data[0] == 'g')
                         {
-
+                            
 
                         }
                         auto nextmsgslen =  readBuffer.pos - thismsglen;
@@ -429,7 +429,6 @@ void allAnswers(Client * omittedClient, char * buffer)
             strncat(buffer, (*it).c_str() , strlen((*it).c_str()));
             strcat(buffer,",\0");
         }
-        strcat(buffer,";");
         }
     }
     strcat(buffer,"\n");

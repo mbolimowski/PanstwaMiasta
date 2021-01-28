@@ -163,7 +163,7 @@ public:
                             {
                                 calcClientsPoints();    
                                 cleanBeforeNextRound();
-                                if(rounds == 0)
+                                if(rounds == 1)
                                 {
                                     cleanAllNextGame();
                                     gameStarted =false;
@@ -260,8 +260,14 @@ class : Handler {
             printf("New connection from: %s:%hu (fd: %d)\n", inet_ntoa(clientAddr.sin_addr), ntohs(clientAddr.sin_port), clientFd);
             Client * newClient = new Client(clientFd); 
             clients.insert(newClient);
+            if(!gameStarted)
+            {
             startOptions(newClient);
-            sendPlayersInfo();
+            }
+            else{
+            startRound();
+            }
+                        sendPlayersInfo();
             }
         }
         if(events & ~EPOLLIN){

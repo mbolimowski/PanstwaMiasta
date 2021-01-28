@@ -65,3 +65,76 @@ void gameMain::addPoints(QString points)
 {
     ui->punktyListWidget->addItem(points);
 }
+
+QString gameMain::getRounds(){
+    return ui->iloscRundTextEdit->toPlainText();
+}
+
+int gameMain::isCheckedAtLeastOneBox(){
+    int counter = 0;
+    counter += ui->panstwoCheckBox->isChecked();
+    counter += ui->miastoCheckBox->isChecked();
+    counter += ui->zwierzeCheckBox->isChecked();
+    counter += ui->roslinaCheckBox->isChecked();
+    counter += ui->imieCheckBox->isChecked();
+    counter += ui->wodyCheckBox->isChecked();
+    counter += ui->przedmiotCheckBox->isChecked();
+    counter += ui->slawnaOsobaCheckBox->isChecked();
+    if(counter == 0){
+        QMessageBox messageBox;
+        messageBox.critical(this, "Błąd", "Należy wybrać przynajmniej jedną kategorie!");
+        return -1;
+    }
+
+    return 1;
+}
+
+QStringList gameMain::getCheckedBoxes(){
+    QStringList checkedBoxes = {};
+    if(ui->panstwoCheckBox->isChecked()){
+        checkedBoxes << ui->panstwoLabel->text();
+    }
+    if(ui->miastoCheckBox->isChecked()){
+        checkedBoxes << ui->miastoLabel->text();
+    }
+    if(ui->zwierzeCheckBox->isChecked()){
+        checkedBoxes << ui->zwierzeLabel->text();
+    }
+    if(ui->roslinaCheckBox->isChecked()){
+        checkedBoxes << ui->roslinaLabel->text();
+    }
+    if(ui->imieCheckBox->isChecked()){
+        checkedBoxes << ui->imieLabel->text();
+    }
+    if(ui->wodyCheckBox->isChecked()){
+        checkedBoxes << ui->wodyLabel->text();
+    }
+    if(ui->przedmiotCheckBox->isChecked()){
+        checkedBoxes << ui->przedmiotLabel->text();
+    }
+    if(ui->slawnaOsobaCheckBox->isChecked()){
+        checkedBoxes << ui->slawnaOsobaLabel->text();
+    }
+
+    return checkedBoxes;
+}
+
+int gameMain::isRoundsCorrect(){
+    QString rounds = ui->iloscRundTextEdit->toPlainText();
+    if(rounds == ""){
+        QMessageBox messageBox;
+        messageBox.critical(this, "Błąd", "Należy wpisac liczbe rund!");
+        return -1;
+    }
+    for(int i = 0; i < rounds.length(); i++){
+        if(!rounds[i].isDigit()){
+            return -1;
+        }
+    }
+    return 1;
+}
+
+
+QPushButton * gameMain::getStartButton(){
+    return ui->startButton;
+}

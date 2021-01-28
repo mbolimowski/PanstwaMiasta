@@ -15,6 +15,7 @@ Application::Application(QWidget * parent) : QMainWindow(parent)
         delete this;
     }
     connect(login->getConnectButton(), &QPushButton::clicked, this, &Application::connectButtonHit);
+    connect(gamemain->getStartButton(), &QPushButton::clicked, this, &Application::startButtonHit);
 }
 
 
@@ -53,6 +54,19 @@ void Application::connectButtonHit()
     }
 
 }
+
+void Application::startButtonHit(){
+    QString message;
+    if(gamemain->isRoundsCorrect() && gamemain->isCheckedAtLeastOneBox()){
+        message = gamemain->getRounds() + ",";
+        QStringList checkBoxesList = gamemain->getCheckedBoxes();
+        for(int i = 0; i < checkBoxesList.size(); i++){
+            message += checkBoxesList[i] + ",";
+        }
+        sendMessage("s" + message + "\n");
+    }
+}
+
 
 
 void Application::connected()

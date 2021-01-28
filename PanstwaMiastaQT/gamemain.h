@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QMessageBox>
 #include <QDebug>
+#include <QCheckBox>
 namespace Ui {
 class gameMain;
 }
@@ -26,6 +27,8 @@ public:
     void setCheckboxesDisabled();
 
     void setStartButtonDisabled();
+
+    void setStartButtonEnabled();
 
     void setEditRoundsTextEditDisabled();
 
@@ -74,6 +77,9 @@ public:
     void setTime(int seconds);
 
     QString getAnswers();
+
+    void setCheckBoxesEnabled();
+
 
 private:
     Ui::gameMain *ui;

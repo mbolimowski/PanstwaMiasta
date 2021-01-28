@@ -63,7 +63,6 @@ void Application::connectButtonHit()
 }
 
 void Application::startButtonHit(){
-    gamemain->setStartButtonDisabled();
     QString message;
     if(gamemain->isRoundsCorrect() == 1 && gamemain->isCheckedAtLeastOneBox() == 1){
         message = gamemain->getRounds() + ",";
@@ -73,6 +72,7 @@ void Application::startButtonHit(){
         }
         sendMessage("s" + message + "\n");
     }
+
 }
 
 void Application::sendAnswersButtonHit(){
@@ -138,6 +138,10 @@ void Application::readyRead()
         qDebug() << action;
         if(action[0] == '1')
         {
+            gamemain->setSendAnswerButtonDisable();
+            gamemain->setStartButtonEnabled();
+            gamemain->setEditRoundsTextEditEnabled();
+            gamemain->setCheckBoxesEnabled();
             gamemain->setCategoriesDisabled();
             QMessageBox mb;
             mb.information(gamemain, "Informacja", "Zostałeś właścicielem! Oznacza to, że możesz wybrać kategorie dostępne w następnej grze oraz ilość rund. Kliknij przycisk start gdy będziesz gotowy!");
@@ -147,6 +151,7 @@ void Application::readyRead()
 
         if(action[0] == '2')
         {
+            gamemain->setSendAnswerButtonDisable();
             gamemain->setCheckboxesDisabled();
             gamemain->setCategoriesDisabled();
             gamemain->setStartButtonDisabled();
@@ -182,9 +187,16 @@ void Application::readyRead()
 
 
         if(action[0] == 's'){
-            voteWindow->hide();
-            gamemain->show();
             gamemain->setSendAnswerButtonEnable();
+            gamemain->setCheckboxesDisabled();
+            gamemain->setStartButtonDisabled();
+            gamemain->setEditRoundsTextEditDisabled();
+
+
+            gamemain->show();
+            voteWindow->hide();
+
+
             roundSeconds = 180;
             action = action.mid(1, action.length()-1);
             QString rounds;
@@ -276,6 +288,7 @@ void Application::closeAll()
     login->close();
     this->close();
     gamemain->close();
+    voteWindow->close();
 }
 
 void Application::updateTime(){

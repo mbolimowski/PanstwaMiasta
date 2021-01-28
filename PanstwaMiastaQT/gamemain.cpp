@@ -153,28 +153,28 @@ QPushButton * gameMain::getSendAnswerButton(){
 }
 
 int gameMain::isSendingAnswerCorrect(){
-    if(ui->panstwoTextEdit->isEnabled() && ui->panstwoTextEdit->toPlainText() == ""){
+    if(ui->panstwoTextEdit->isEnabled() && ui->panstwoTextEdit->toPlainText().isEmpty()){
         return -1;
     }
-    if(ui->miastoTextEdit->isEnabled() && ui->miastoTextEdit->toPlainText() == ""){
+    if(ui->miastoTextEdit->isEnabled() && ui->miastoTextEdit->toPlainText().isEmpty()){
         return -1;
     }
-    if(ui->zwierzeTextEdit->isEnabled() && ui->zwierzeTextEdit->toPlainText() == ""){
+    if(ui->zwierzeTextEdit->isEnabled() && ui->zwierzeTextEdit->toPlainText().isEmpty()){
         return -1;
     }
-    if(ui->roslinaTextEdit->isEnabled() && ui->roslinaTextEdit->toPlainText() == ""){
+    if(ui->roslinaTextEdit->isEnabled() && ui->roslinaTextEdit->toPlainText().isEmpty()){
         return -1;
     }
-    if(ui->imieTextEdit->isEnabled() && ui->imieTextEdit->toPlainText() == ""){
+    if(ui->imieTextEdit->isEnabled() && ui->imieTextEdit->toPlainText().isEmpty()){
         return -1;
     }
-    if(ui->wodyTextEdit->isEnabled() && ui->wodyTextEdit->toPlainText() == ""){
+    if(ui->wodyTextEdit->isEnabled() && ui->wodyTextEdit->toPlainText().isEmpty()){
         return -1;
     }
-    if(ui->przedmiotTextEdit->isEnabled() && ui->przedmiotTextEdit->toPlainText() == ""){
+    if(ui->przedmiotTextEdit->isEnabled() && ui->przedmiotTextEdit->toPlainText().isEmpty()){
         return -1;
     }
-    if(ui->slawnaOsobaTextEdit->isEnabled() && ui->slawnaOsobaTextEdit->toPlainText() == ""){
+    if(ui->slawnaOsobaTextEdit->isEnabled() && ui->slawnaOsobaTextEdit->toPlainText().isEmpty()){
         return -1;
     }
     return 1;

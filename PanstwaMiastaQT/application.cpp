@@ -77,7 +77,7 @@ void Application::sendAnswersButtonHit(){
     }
     else {
         QMessageBox messageBox;
-        messageBox.critical(this, "Błąd", "Należy wypełnic wszystkie wymagane pola aby zglosić odpowiedzi!");
+        messageBox.critical(gamemain, "Błąd", "Należy wypełnic wszystkie wymagane pola aby zglosić odpowiedzi!");
     }
 
 }
@@ -161,6 +161,7 @@ void Application::readyRead()
             }
         }
         if(action[0] == 's'){
+            gamemain->setSendAnswerButtonEnable();
             roundSeconds = 180;
             action = action.mid(1, action.length()-1);
             QString rounds;
@@ -197,6 +198,7 @@ void Application::readyRead()
             roundTimer->start(1000);
         }
         if(action[0] == "z"){
+            gamemain->setSendAnswerButtonDisable();
             roundSeconds = 21;
             gamemain->setTime(roundSeconds);
             QMessageBox mb;

@@ -35,7 +35,25 @@ public:
 
     bool checkPresenceOfElementInListWidget(QString element);
 
+    void addElementToList(QString element);
+
     void clearCountryWidgetList();
+
+    void clearCityWidgetList();
+
+    void clearAnimalWidgetList();
+
+    void clearPlantWidgetList();
+
+    void clearNameWidgetList();
+
+    void clearWaterWidgetList();
+
+    void clearThingWidgetList();
+
+    void clearFamousPersonWidgetList();
+
+    void clearElementsList();
 
 private:
 

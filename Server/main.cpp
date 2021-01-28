@@ -159,7 +159,7 @@ public:
                         {   
                             readVotes(readBuffer.data, thismsglen);
                             numberOfResponses++;
-                            if(numberOfResponses == (int)clients.size())
+                            if(numberOfResponses >= (int)clients.size())
                             {
                                 calcClientsPoints();    
                                 cleanBeforeNextRound();

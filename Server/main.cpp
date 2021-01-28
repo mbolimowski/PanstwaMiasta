@@ -151,10 +151,10 @@ public:
                             numberOfResponses++;
                             if(numberOfResponses == (int)clients.size())
                             {
-                                calcClientsPoints();
-                                sendPlayersInfo();
+                                calcClientsPoints();    
                                 cleanBeforeNextRound();
                                 startRound();
+                                sendPlayersInfo();
                                 
                             }
 
@@ -471,11 +471,11 @@ void readVotes(char * message, int msglen)
             char tmp[31];
             memset(tmp,0,31);
             strncpy(tmp, message+pos, i-pos);
-            std::cout << "vote1: " << tmp<<std::endl;
+            std::cout << "vote: " << tmp<<std::endl;
             std::string strVote(tmp);
             if(answersVotes.find(strVote) == answersVotes.end())
             {
-                answersVotes.insert(std::pair<std::string, int>(strVote,0));
+                answersVotes.insert(std::pair<std::string, int>(strVote,1));
             }
             else{
                 answersVotes[strVote]++; 
@@ -509,7 +509,7 @@ void calcClientsPoints()
                     int answerRepeat = 0;
                     for(Client * tmpClient : clients)
                     {
-                        if(client->fd()!=tmpClient->fd())
+                        if(tmpClient->fd() != client->fd())
                         {
                         
                         for(int i=0;i<(int)tmpClient->getAnswers()->size();i++)

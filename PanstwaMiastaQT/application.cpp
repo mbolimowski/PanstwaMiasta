@@ -34,6 +34,7 @@ Application::~Application()
 }
 
 void Application::sendMessage(QString message){
+    qDebug() << message;
     sock->write(message.toUtf8(), message.toUtf8().length());
 }
 

@@ -26,7 +26,8 @@
 class Client;
 int servFd;
 int epollFd;
-bool answerMode = false;
+bool answerMode = true;
+bool gameStarted = false;
 std::unordered_set<Client*> clients;
 int numberOfResponses = 0;
 int rounds = 0;
@@ -51,7 +52,7 @@ void sendAllAnswers();
 void readVotes(char * message, int msglen);
 void calcClientsPoints();
 void cleanBeforeNextRound();
-
+void cleanAllNextGame();
 struct Handler {
     virtual ~Handler(){}
     virtual void handleEvent(uint32_t events) = 0;
@@ -96,6 +97,7 @@ public:
     char * getName() {return name;}
     int getPoints() {return points;}
     void addPoints(int pt) {points+=pt;}
+    void setPoints(int pt){points = pt;}
     std::vector<std::string> * getAnswers(){return answers;}
     virtual void handleEvent(uint32_t events) override {
         if(events & EPOLLIN) {
@@ -120,6 +122,9 @@ public:
                         }
                         if(readBuffer.data[0] == 's')
                         {
+                            if((int)clients.size() >= 2)
+                            {
+                            gameStarted = true;
                             numberOfResponses = 0;
                             cleanAnswers(this);
                             categories.clear();
@@ -127,6 +132,7 @@ public:
                             answerMode = true;
                             gameInfo(readBuffer.data);
                             startRound();
+                            }
                         }
                         if(readBuffer.data[0] == 'z')
                         {
@@ -155,9 +161,7 @@ public:
                                 cleanBeforeNextRound();
                                 startRound();
                                 sendPlayersInfo();
-                                
                             }
-
                         }
                         auto nextmsgslen =  readBuffer.pos - thismsglen;
                         memmove(readBuffer.data, eol+1, nextmsgslen);
@@ -186,6 +190,18 @@ public:
         }
         if(events & ~(EPOLLIN|EPOLLOUT)) {
             remove();
+            if((int)clients.size() <2)
+            {
+                cleanAllNextGame();
+                char message[3] = "1\n";
+                sendToAll(message, 2);
+                answerMode = true;
+            }
+            if(answerMode == false)
+            {
+                numberOfResponses++;
+            }
+            sendPlayersInfo();
         }
     }
     void write(char * buffer, int count) {
@@ -218,6 +234,8 @@ class : Handler {
     public:
     virtual void handleEvent(uint32_t events) override {
         if(events & EPOLLIN){
+            if(answerMode)
+            {
             sockaddr_in clientAddr{};
             socklen_t clientAddrSize = sizeof(clientAddr);
             auto clientFd = accept(servFd, (sockaddr*) &clientAddr, &clientAddrSize);
@@ -226,6 +244,8 @@ class : Handler {
             Client * newClient = new Client(clientFd); 
             clients.insert(newClient);
             startOptions(newClient);
+            sendPlayersInfo();
+            }
         }
         if(events & ~EPOLLIN){
             error(0, errno, "Event %x on server socket", events);
@@ -543,6 +563,20 @@ void cleanBeforeNextRound()
     for(Client * client : clients)
     {
         cleanAnswers(client);
+    }
+    answersVotes.clear();
+}
+
+
+void cleanAllNextGame()
+{
+    numberOfResponses = 0;
+    answerMode = true;
+    gameStarted = false;
+    for(Client * client : clients)
+    {
+        cleanAnswers(client);
+        client->setPoints(0);
     }
     answersVotes.clear();
 }

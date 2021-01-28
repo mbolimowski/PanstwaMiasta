@@ -57,7 +57,7 @@ void Application::connectButtonHit()
 
 void Application::startButtonHit(){
     QString message;
-    if(gamemain->isRoundsCorrect() && gamemain->isCheckedAtLeastOneBox()){
+    if(gamemain->isRoundsCorrect() == 1 && gamemain->isCheckedAtLeastOneBox() == 1){
         message = gamemain->getRounds() + ",";
         QStringList checkBoxesList = gamemain->getCheckedBoxes();
         for(int i = 0; i < checkBoxesList.size(); i++){

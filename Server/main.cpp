@@ -122,7 +122,7 @@ public:
                         }
                         if(readBuffer.data[0] == 's')
                         {
-                            if((int)clients.size() >= 2)
+                            if((int)clients.size() >= 2 && rounds >= 0)
                             {
                             gameStarted = true;
                             numberOfResponses = 0;
@@ -132,6 +132,10 @@ public:
                             answerMode = true;
                             gameInfo(readBuffer.data);
                             startRound();
+                            }
+                            else{
+                                
+
                             }
                         }
                         if(readBuffer.data[0] == 'z')
@@ -159,8 +163,20 @@ public:
                             {
                                 calcClientsPoints();    
                                 cleanBeforeNextRound();
+                                if(rounds == 0)
+                                {
+                                    cleanAllNextGame();
+                                    gameStarted =false;
+                                    answerMode = true;
+                                    for(Client * tmpClient : clients)
+                                    {
+                                        startOptions(tmpClient);
+                                    }
+                                }
+                                else{
                                 startRound();
                                 sendPlayersInfo();
+                                }
                             }
                         }
                         auto nextmsgslen =  readBuffer.pos - thismsglen;

@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QListWidgetItem>
+#include <QList>
 
 namespace Ui {
 class vote;
@@ -32,9 +33,16 @@ public:
 
     void addToFamousPersonWidgetList(QString famousPerson);
 
-    void checkPresenceOfElementInListWidget(QString element);
+    bool checkPresenceOfElementInListWidget(QString element);
+
+    void clearCountryWidgetList();
 
 private:
+
+    QList<QString> * itemsInWidgetList;
+
+    QListWidgetItem * items;
+
     Ui::vote *ui;
 };
 
